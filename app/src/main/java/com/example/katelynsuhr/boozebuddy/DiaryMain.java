@@ -5,16 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class DiaryMain extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_diarymain);
     }
-
-    public void diary_main (View view){
-        Intent intent = new Intent(MainActivity.this, DiaryMain.class);
+    public void foodClick (View view){
+        Intent intent = new Intent(DiaryMain.this, DiarySearch.class);
         startActivity(intent);
     }
 }
