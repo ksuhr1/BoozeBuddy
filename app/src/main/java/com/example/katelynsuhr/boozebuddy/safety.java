@@ -12,12 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class safety extends AppCompatActivity {
+public class safetyblocked extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_safety);
+        setContentView(R.layout.content_safety);
         TextView safedisplay = (TextView)findViewById(R.id.safetydisplay);
         EditText safeedit = (EditText)findViewById(R.id.safetyedit);
         Button safeenter = (Button)findViewById(R.id.safetyenter);
