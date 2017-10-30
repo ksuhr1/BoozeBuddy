@@ -8,4 +8,113 @@
     tools:context="com.example.katelynsuhr.boozebuddy.UserProfile"
     tools:showIn="@layout/activity_user_profile">
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="197dp"
+        android:layout_height="36dp"
+        android:text="TextView"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <Button
+        android:id="@+id/EasyTrack"
+        android:layout_width="118dp"
+        android:layout_height="46dp"
+        android:text="EasyTrack"
+        android:layout_marginBottom="140dp"
+        android:layout_marginRight="16dp"
+        android:onClick="easyTrack_main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/PartyMode"
+        android:layout_width="118dp"
+        android:layout_height="46dp"
+        android:text="Party!"
+        android:layout_marginBottom="140dp"
+        android:onClick="party_main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="93dp"
+        android:layout_height="99dp"
+        app:srcCompat="@mipmap/ic_launcher_round"
+        android:layout_marginBottom="390dp"
+        android:layout_marginLeft="30dp"
+        app:layout_constraintHorizontal_bias=".9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+ />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="266dp"
+        android:layout_height="24dp"
+        android:layout_marginBottom="290dp"
+        app:layout_constraintHorizontal_bias=".9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="264dp"
+        android:layout_height="26dp"
+        android:layout_marginBottom="240dp"
+        app:layout_constraintHorizontal_bias=".9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/Blocked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Blocked"
+        android:layout_marginBottom="280dp"
+        android:layout_marginLeft="16dp"
+        android:onClick="blocked_main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/SOS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SOS"
+        android:layout_marginBottom="230dp"
+        android:layout_marginLeft="16dp"
+        android:onClick="safety_main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/Diary"
+        android:layout_width="118dp"
+        android:layout_height="46dp"
+        android:text="Diary"
+        android:layout_marginBottom="140dp"
+        android:layout_marginLeft="16dp"
+        android:onClick="diary_main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="197dp"
+        android:layout_height="36dp"
+        android:text="TextView"
+        android:layout_marginTop="70dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

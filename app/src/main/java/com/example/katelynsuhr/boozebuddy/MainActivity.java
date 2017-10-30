@@ -17,4 +17,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, DiaryMain.class);
         startActivity(intent);
     }
+
+    public void profile_main (View view){
+        Intent intent = new Intent(MainActivity.this, UserProfile.class);
+        startActivity(intent);
+    }
+
+
 }
