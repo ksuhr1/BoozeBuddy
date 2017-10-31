@@ -1,6 +1,7 @@
 package com.example.katelynsuhr.boozebuddy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,28 +12,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.provider.ContactsContract;import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.widget.AdapterView;
 
-public class safetyblocked extends AppCompatActivity {
+public class safety extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_safety);
-        TextView safedisplay = (TextView)findViewById(R.id.safetydisplay);
-        EditText safeedit = (EditText)findViewById(R.id.safetyedit);
-        Button safeenter = (Button)findViewById(R.id.safetyenter);
+        setContentView(R.layout.activity_safety);
         SharedPreferences safetylist = getSharedPreferences("numcount", Context.MODE_PRIVATE);
         SharedPreferences.Editor numeditor = safetylist.edit();
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
+    public void contactview_main (View view){
+        Intent intent = new Intent(safety.this, ContactView.class);
+        startActivity(intent);
+    }
+
+
+
 
 }

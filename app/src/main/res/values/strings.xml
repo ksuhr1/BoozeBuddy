@@ -3,4 +3,5 @@
     <string name="title_activity_user_profile">UserProfile</string>
     <string name="title_activity_safety">safety</string>
     <string name="title_activity_blocked">blocked</string>
+    <string name="title_activity_contact_view">ContactView</string>
 </resources>

@@ -26,10 +26,6 @@ public class UserProfile extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void blocked_main (View view){
-        Intent intent = new Intent(UserProfile.this, blocked.class);
-        startActivity(intent);
-    }
 }
 
 
