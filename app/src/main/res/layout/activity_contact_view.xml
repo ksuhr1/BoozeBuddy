@@ -26,7 +26,7 @@
         android:layout_height="39dp"
         android:text="Search"
         android:layout_marginRight="20dp"
-        android:onClick="searchcontact"
+        android:onClick="editcontact"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 

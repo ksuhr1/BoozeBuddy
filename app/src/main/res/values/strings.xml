@@ -4,4 +4,5 @@
     <string name="title_activity_safety">safety</string>
     <string name="title_activity_blocked">blocked</string>
     <string name="title_activity_contact_view">ContactView</string>
+    <string name="title_activity_contactsearch">contactsearch</string>
 </resources>
