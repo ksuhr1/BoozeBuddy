@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.katelynsuhr.boozebuddy">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-feature android:name="android.hardware.camera"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -23,9 +25,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DiaryMain"
-                    android:parentActivityName=".MainActivity"/>
-        <activity android:name=".DiarySearch"></activity>
+        <activity
+            android:name=".DiaryMain"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".DiarySearch" />
+        <activity
+            android:name=".UserProfile"
+            android:label="@string/title_activity_user_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".safety"
+            android:label="@string/title_activity_safety"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ContactView"
+            android:label="@string/title_activity_contact_view"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
