@@ -27,8 +27,8 @@ public class ContactView extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_view);
-        contact = (EditText)findViewById(R.id.entercontact);
-        display = (TextView)findViewById(R.id.displaycontact);
+        contact = findViewById(R.id.entercontact);
+        display = findViewById(R.id.displaycontact);
     }
 
     public void searchcontact (View view) {
@@ -37,8 +37,8 @@ public class ContactView extends Activity {
 //                requestPermissions(new String[] {Manifest.permission.WRITE_CONTACTS},
 //                        REQUEST_CODE_ASK_PERMISSIONS);
 //            }
-            String content = contact.getText().toString();
-            display.setText(getContactDisplayNameByNumber(content));
+        String content = contact.getText().toString();
+        display.setText(getContactDisplayNameByNumber(content));
     }
     public String getContactDisplayNameByNumber(String number) {
         Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));

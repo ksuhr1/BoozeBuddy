@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.katelynsuhr.boozebuddy.UserProfile"
     tools:showIn="@layout/activity_user_profile">
 
@@ -15,6 +14,7 @@
         android:text="TextView"
         android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
@@ -48,6 +48,7 @@
         app:srcCompat="@mipmap/ic_launcher_round"
         android:layout_marginBottom="390dp"
         android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
         app:layout_constraintHorizontal_bias=".9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -79,6 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="251dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:onClick="safety_main"
         android:text="Edit"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -91,6 +93,7 @@
         android:text="Diary"
         android:layout_marginBottom="140dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:onClick="diary_main"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -103,6 +106,7 @@
         android:text="TextView"
         android:layout_marginTop="70dp"
         android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
