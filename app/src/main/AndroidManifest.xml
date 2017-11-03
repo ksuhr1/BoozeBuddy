@@ -45,7 +45,8 @@
         <activity
             android:name=".IntroMenu"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".CalculatorSpending"></activity>
+        <activity android:name=".CalculatorSpending"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

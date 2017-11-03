@@ -23,5 +23,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void intro_menu (View view){
+        Intent intent = new Intent(MainActivity.this, IntroMenu.class);
+        startActivity(intent);
+    }
+
 
 }
