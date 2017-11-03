@@ -6,6 +6,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+<<<<<<< HEAD
+
+=======
+>>>>>>> bc1ad4f4a985651041459d548414968cfb14c747
 
 public class safety extends AppCompatActivity {
 
@@ -17,11 +21,11 @@ public class safety extends AppCompatActivity {
         SharedPreferences safetylist = getSharedPreferences("numcount", Context.MODE_PRIVATE);
         SharedPreferences.Editor numeditor = safetylist.edit();
     }
-    public void contactview_main (View view){
-        Intent intent = new Intent(safety.this, ContactView.class);
+
+    public void contactview_main (View view) {
+        Intent intent = new Intent(safety.this, contactsearch.class);
         startActivity(intent);
     }
-
 
 
 
