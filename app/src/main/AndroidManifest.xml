@@ -43,12 +43,8 @@
             android:label="@string/title_activity_contact_view"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-<<<<<<< HEAD
             android:name=".contactsearch"
             android:label="@string/title_activity_contactsearch"
-=======
-            android:name=".IntroMenu"
->>>>>>> bc1ad4f4a985651041459d548414968cfb14c747
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".CalculatorSpending"
             android:theme="@style/AppTheme.NoActionBar"></activity>
