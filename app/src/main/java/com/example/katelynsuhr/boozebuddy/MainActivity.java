@@ -10,7 +10,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_intro_menu);
     }
 
     public void diary_main (View view){
@@ -18,13 +18,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void profile_main (View view){
-        Intent intent = new Intent(MainActivity.this, UserProfile.class);
+    public void intro_party (View view){
+        Intent intent = new Intent(MainActivity.this, partymode.class);
         startActivity(intent);
     }
 
-    public void intro_menu (View view){
-        Intent intent = new Intent(MainActivity.this, IntroMenu.class);
+    public void intro_profile (View view){
+        Intent intent = new Intent(MainActivity.this, UserProfile.class);
         startActivity(intent);
     }
 

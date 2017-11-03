@@ -5,12 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
     tools:context="com.example.katelynsuhr.boozebuddy.MainActivity">
-=======
-    tools:context="com.example.katelynsuhr.boozebuddy.safety"
-    tools:showIn="@layout/activity_safety">
->>>>>>> bc1ad4f4a985651041459d548414968cfb14c747
 
     <ListView
         android:layout_width="379dp"

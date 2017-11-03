@@ -31,8 +31,6 @@ public class ContactView extends Activity {
         display = findViewById(R.id.displaycontact);
     }
 
-<<<<<<< HEAD
-=======
     public void searchcontact (View view) {
 //            int hasWriteContactsPermission = checkSelfPermission(Manifest.permission.READ_CONTACTS);
 //            if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
@@ -64,8 +62,5 @@ public class ContactView extends Activity {
 
         return name;
     }
-
->>>>>>> bc1ad4f4a985651041459d548414968cfb14c747
-
 
 }

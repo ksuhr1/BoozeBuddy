@@ -6,10 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-<<<<<<< HEAD
 
-=======
->>>>>>> bc1ad4f4a985651041459d548414968cfb14c747
 
 public class safety extends AppCompatActivity {
 
