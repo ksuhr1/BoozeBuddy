@@ -12,16 +12,78 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.zxing.Result;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 import static android.Manifest.permission.CAMERA;
 
-public class DiarySearch extends AppCompatActivity implements ZXingScannerView.ResultHandler{
+public class DiarySearch extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_diary_search);
+    }
 
+    public void sendRequest(View view){
+        final TextView textView = (TextView) findViewById(R.id.tvJsonItem);
+        TextView input = (TextView) findViewById(R.id.drinkInput);
+
+        try {
+
+            //Instantiate the RequestQueue
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.getCache().clear();
+            String url = "https://api.nutritionix.com/v1_1/search";
+            JSONObject jsonBody = new JSONObject();
+            jsonBody.put("appId", "82c97058");
+            jsonBody.put("appKey", "979eb4ea51a7fd11e7b5df0cae3dfd73");
+            jsonBody.put("query", input.getText());
+            //final String requestBody = jsonBody.toString();
+
+
+            //Request a string response form the provided URL
+            JsonObjectRequest jsnRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            //Display the first 500 characters of the resposne
+                            // textView.setText("Response is:" + response.substring(0, 500));
+                            Log.i("VOLLEY",response.toString());
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    // textView.setText("That didn't work");
+                    Log.e("VOLLEY", error.toString());
+                }
+            });
+            requestQueue.add(jsnRequest);
+        } catch(JSONException e)
+
+        {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+        //implements ZXingScannerView.ResultHandler{
+/*
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView scannerView;
 
@@ -76,7 +138,7 @@ public class DiarySearch extends AppCompatActivity implements ZXingScannerView.R
                             if(shouldShowRequestPermissionRationale(CAMERA))
                             {
                                 displayAlertMessage("You need to allow access for both permissions",
-                                        new DialogInterface.OnClickListener(){
+                                       // new DialogInterface.OnClickListener(){
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                               //  if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
@@ -146,7 +208,7 @@ public class DiarySearch extends AppCompatActivity implements ZXingScannerView.R
                 scannerView.resumeCameraPreview(DiarySearch.this);
             }
         });
-        builder.setNeutralButton("Visit", new DialogInterface.OnClickListener(){
+        builder.setNeutralButton("Visit",// new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialogInterface, int i){
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(scanResult));
@@ -160,3 +222,4 @@ public class DiarySearch extends AppCompatActivity implements ZXingScannerView.R
 
     }
 }
+*/
