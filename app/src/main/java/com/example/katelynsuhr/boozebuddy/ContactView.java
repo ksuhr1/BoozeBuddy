@@ -63,6 +63,4 @@ public class ContactView extends Activity {
         return name;
     }
 
-
-
 }

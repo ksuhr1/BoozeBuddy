@@ -30,5 +30,6 @@ dependencies {
     compile 'com.android.volley:volley:1.0.0'
     compile 'com.applandeo:material-calendar-view:1.0.1'
     compile 'com.getbase:floatingactionbutton:1.10.1'
+    compile 'com.android.support:design:26.+'
     testCompile 'junit:junit:4.12'
 }
