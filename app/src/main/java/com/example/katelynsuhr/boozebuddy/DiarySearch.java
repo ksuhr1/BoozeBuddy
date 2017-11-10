@@ -14,6 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,8 +28,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.zxing.Result;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -40,9 +47,8 @@ public class DiarySearch extends AppCompatActivity {
     }
 
     public void sendRequest(View view){
-        final TextView textView = (TextView) findViewById(R.id.tvJsonItem);
+       // final TextView textView = (TextView) findViewById(R.id.tvJsonItem);
         TextView input = (TextView) findViewById(R.id.drinkInput);
-
         try {
 
             //Instantiate the RequestQueue
@@ -61,8 +67,6 @@ public class DiarySearch extends AppCompatActivity {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            //Display the first 500 characters of the resposne
-                            // textView.setText("Response is:" + response.substring(0, 500));
                             Log.i("VOLLEY",response.toString());
                         }
                     }, new Response.ErrorListener() {
@@ -73,12 +77,35 @@ public class DiarySearch extends AppCompatActivity {
                 }
             });
             requestQueue.add(jsnRequest);
-        } catch(JSONException e)
 
+
+           // String title = jsonBody.getString("item_name");
+            //Log.d("Name", "Name: "+ String.valueOf(title));
+           // System.out.print(title);
+
+
+
+          /*  ArrayAdapter<String> adapter;
+            ListView mListView = (ListView) findViewById(R.id.searchResults);
+
+            String requestBody = jsonBody.toString();
+            JSONArray jsonArray = new JSONArray(requestBody);
+
+            int length = jsonArray.length();
+            List<String> listContents = new ArrayList<String>(length);
+            for(int i = 0; i< length; i++) {
+                listContents.add(jsonArray.getString(i));
+            }
+            Log.e("NEWArray", listContents.toString());
+            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listContents);
+            mListView.setAdapter(adapter);
+            */
+        } catch(JSONException e)
         {
             e.printStackTrace();
         }
-    }
+
+        }
 }
 
 
