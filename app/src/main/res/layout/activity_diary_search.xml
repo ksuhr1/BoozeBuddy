@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="368dp"
-    android:layout_height="495dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.katelynsuhr.boozebuddy.DiarySearch"
-    tools:layout_editor_absoluteY="8dp"
-    tools:layout_editor_absoluteX="8dp">
+    tools:layout_editor_absoluteX="8dp"
+    tools:layout_editor_absoluteY="8dp">
 
     <EditText
         android:id="@+id/drinkInput"
@@ -14,34 +14,37 @@
         android:layout_height="wrap_content"
         android:hint="Search a Drink"
         android:inputType="textFilter" />
+
     <Button
         android:id="@+id/queryButton"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:onClick="sendRequest"
-        style="@style/Base.Widget.AppCompat.Button.Borderless"
-        android:text="Search"/>
+        android:text="Search" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
+
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:indeterminate="true"
             android:layout_centerHorizontal="true"
+            android:indeterminate="true"
             android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/jsonData"
+        <ListView
+            android:id="@+id/jsonResults"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="TextView"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="TextView" />
 
     </RelativeLayout>
 </LinearLayout>

@@ -40,42 +40,36 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import static android.Manifest.permission.CAMERA;
 
 public class DiarySearch extends AppCompatActivity {
-
-    TextView results;
-    String url = "https://api.nutritionix.com/v1_1/search";
-    String data = "";
-    RequestQueue requestQueue;
+    ArrayAdapter<String> adapter;
+    List<String>items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_search);
-        requestQueue = Volley.newRequestQueue(this);
-        results = (TextView) findViewById(R.id.jsonData);
 
-          }
+    }
 
-         public void sendRequest(View view){
-        // final TextView textView = (TextView) findViewById(R.id.tvJsonItem);
+    //When user hits search
+    public void sendRequest(View view){
         TextView input = (TextView) findViewById(R.id.drinkInput);
             try {
-                //Instantiate the RequestQueue
-                //  RequestQueue requestQueue = Volley.newRequestQueue(this);
-                //   requestQueue.getCache().clear();
-                //  String url = "https://api.nutritionix.com/v1_1/search";
                 final JSONObject jsonBody = new JSONObject();
+                RequestQueue requestQueue = Volley.newRequestQueue(this);
+                String url = "https://api.nutritionix.com/v1_1/search";
                 jsonBody.put("appId", "82c97058");
                 jsonBody.put("appKey", "979eb4ea51a7fd11e7b5df0cae3dfd73");
                 jsonBody.put("query", input.getText());
-                final String requestBody = jsonBody.toString();
-
+                ListView listView = (ListView) findViewById(R.id.jsonResults);
+                items = new ArrayList<>();
+                adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, items);
+                listView.setAdapter(adapter);
 
                 //Request a string response form the provided URL
                 JsonObjectRequest jsnRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                          //  results.setText("Response:" +response.toString());
                             Log.i("VOLLEY", response.toString());
                             try {
                                 JSONArray jsonArray = response.getJSONArray("hits");
@@ -85,14 +79,12 @@ public class DiarySearch extends AppCompatActivity {
                                     JSONObject details = new JSONObject(field);
                                     String name = details.getString("item_name");
                                     String brand = details.getString("brand_name");
-
-                                    results.append(name+"\n"+brand+"\n"+"\n\n");
+                                    items.add(name+"\n"+brand+"\n"+"\n\n");
                                 }
-
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                            adapter.notifyDataSetChanged();
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -102,31 +94,6 @@ public class DiarySearch extends AppCompatActivity {
                 }
             });
             requestQueue.add(jsnRequest);
-
-
-            // String title = jsonBody.getString("item_name");
-            //Log.d("Name", "Name: "+ String.valueOf(title));
-            // System.out.print(title);
-
-
-//            ArrayAdapter<String> adapter;
-//            ListView mListView = (ListView) findViewById(R.id.searchResults);
-//
-//
-//
-//            String requestBody = jsonBody.toString();
-//            JSONOb jsonArray = new JSONArray(requestBody);
-//
-//            int length = jsonArray.length();
-//            List<String> listContents = new ArrayList<String>(length);
-//            for(int i = 0; i< length; i++) {
-//                listContents.add(jsonArray.getString(i));
-//            }
-//            Log.e("NEWArray", listContents.toString());
-//
-//            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listContents);
-//            mListView.setAdapter(adapter);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
