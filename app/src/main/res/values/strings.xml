@@ -10,4 +10,7 @@
     <string name="party_mode">PARTY MODE</string>
     <string name="progress">PROGRESS</string>
     <string name="drunk_dial">DRUNK DIAL</string>
+    <string name="my_drinks">My Drinks</string>
+    <string name="search_a_drink">Search a Drink</string>
+    <string name="search">Search</string>
 </resources>

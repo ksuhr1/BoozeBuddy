@@ -6,23 +6,38 @@
     android:orientation="vertical"
     tools:context="com.example.katelynsuhr.boozebuddy.DiarySearch"
     tools:layout_editor_absoluteX="8dp"
-    tools:layout_editor_absoluteY="8dp">
+    tools:layout_editor_absoluteY="8dp"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="1">
 
     <EditText
         android:id="@+id/drinkInput"
-        android:layout_width="385dp"
-        android:layout_height="wrap_content"
-        android:hint="Search a Drink"
-        android:inputType="textFilter" />
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="#FFFF"
+        android:hint="@string/search_a_drink"
+        android:inputType="textFilter"
+        android:layout_weight="1.00"
+        android:paddingLeft="20dp"
+        android:paddingStart="20dp"
+        android:paddingRight="0dp"
+        android:paddingEnd="0dp"/>
 
     <Button
         android:id="@+id/queryButton"
         style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="end"
         android:onClick="sendRequest"
-        android:text="Search" />
+        android:text="@string/search"
+        android:background="@drawable/background_color"
+        android:drawablePadding="2dip" />
+
+</LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -37,14 +52,20 @@
             android:indeterminate="true"
             android:visibility="gone" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:id="@+id/textView" />
+
         <ListView
             android:id="@+id/jsonResults"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#FFFF"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/textView"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="TextView" />
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 </LinearLayout>
