@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -60,10 +61,29 @@ public class DiarySearch extends AppCompatActivity {
                 jsonBody.put("appId", "82c97058");
                 jsonBody.put("appKey", "979eb4ea51a7fd11e7b5df0cae3dfd73");
                 jsonBody.put("query", input.getText());
-                ListView listView = (ListView) findViewById(R.id.jsonResults);
+//                jsonBody.put("results","0:20");
+//                jsonBody.put("cal_min", "0");
+//                jsonBody.put("cal_max","50000");
+//                jsonBody
+                final ListView listView = (ListView) findViewById(R.id.jsonResults);
                 items = new ArrayList<>();
                 adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, items);
                 listView.setAdapter(adapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String selectedFromList = (String) (listView.getItemAtPosition(position));
+                        System.out.print(position);
+                        System.out.print(selectedFromList);
+                        Intent intent = new Intent(view.getContext(), SearchItem.class);
+                        intent.putExtra("list", selectedFromList);
+                        startActivity(intent);
+                      //  myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                       // myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                      //  myIntent.putExtra("id", position);
+                      //  startActivityForResult(myIntent, 0);
+                    }
+                });
 
                 //Request a string response form the provided URL
                 JsonObjectRequest jsnRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody,
@@ -79,6 +99,7 @@ public class DiarySearch extends AppCompatActivity {
                                     JSONObject details = new JSONObject(field);
                                     String name = details.getString("item_name");
                                     String brand = details.getString("brand_name");
+                                  // String calories = details.getString("nf_calories");
                                     items.add(name+"\n"+brand+"\n"+"\n\n");
                                 }
                             } catch (JSONException e) {
@@ -97,6 +118,8 @@ public class DiarySearch extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
     }
 
         }

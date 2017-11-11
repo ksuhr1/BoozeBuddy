@@ -5,4 +5,9 @@
     <string name="title_activity_blocked">blocked</string>
     <string name="title_activity_contact_view">ContactView</string>
     <string name="title_activity_contactsearch">contactsearch</string>
+    <string name="profile">Profile</string>
+    <string name="diary">DIARY</string>
+    <string name="party_mode">PARTY MODE</string>
+    <string name="progress">PROGRESS</string>
+    <string name="drunk_dial">DRUNK DIAL</string>
 </resources>
