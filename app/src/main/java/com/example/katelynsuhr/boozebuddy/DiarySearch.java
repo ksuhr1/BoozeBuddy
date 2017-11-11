@@ -75,37 +75,24 @@ public class DiarySearch extends AppCompatActivity {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            //results.setText("Response:" +response.toString());
-                            String requestBody = response.toString();
-                            //JSONObject foodObject = new JSONObject(requestBody);
+                          //  results.setText("Response:" +response.toString());
+                            Log.i("VOLLEY", response.toString());
                             try {
-                              //  String requestBody = response.toString();
-                                JSONObject foodObject = new JSONObject(requestBody);
-                                JSONArray resultArray = foodObject.getJSONArray("item_name");
-                                for(int i = 0; i< resultArray.length(); i++){
-                                    JSONObject obj = resultArray.getJSONObject(i);
-                                    String name = obj.getString("item_name");
-                                    results.setText("Item name");
+                                JSONArray jsonArray = response.getJSONArray("hits");
+                                for(int i = 0; i< jsonArray.length(); i++){
+                                    JSONObject obj = jsonArray.getJSONObject(i);
+                                    String field = obj.getString("fields");
+                                    JSONObject details = new JSONObject(field);
+                                    String name = details.getString("item_name");
+                                    String brand = details.getString("brand_name");
 
+                                    results.append(name+"\n"+brand+"\n"+"\n\n");
                                 }
-                                //JSONObject foodObject = response.getJSONObject(requestBody);
-                                //String name = foodObject.getString("item_name");
-                              //  System.out.println(name);
-//                                String title = foodObject.getString("item_name");
-                              //  results.setText("Item name: " + name);
-                           // }
-                          //  results.setText("Response:"+response.toString());
-//                            try {
-//                                JSONObject obj = response.getJSONObject("jsonBody");
-//                                String name = obj.getString("item_name");
-//                                String id = obj.getString("item_id");
-//
-//                                data += "ID:" + id +"Name:"+name;
-//                                results.setText(data);
+
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            Log.i("VOLLEY", response.toString());
                         }
                     }, new Response.ErrorListener() {
                 @Override
