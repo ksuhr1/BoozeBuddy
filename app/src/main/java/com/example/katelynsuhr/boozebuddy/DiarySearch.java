@@ -50,6 +50,10 @@ public class DiarySearch extends AppCompatActivity {
         setContentView(R.layout.activity_diary_search);
 
     }
+    public void scanRequest (View view){
+        Intent intent = new Intent(DiarySearch.this, DiaryMain.class);
+        startActivity(intent);
+    }
 
     //When user hits search
     public void sendRequest(View view){
@@ -61,10 +65,6 @@ public class DiarySearch extends AppCompatActivity {
                 jsonBody.put("appId", "82c97058");
                 jsonBody.put("appKey", "979eb4ea51a7fd11e7b5df0cae3dfd73");
                 jsonBody.put("query", input.getText());
-//                jsonBody.put("results","0:20");
-//                jsonBody.put("cal_min", "0");
-//                jsonBody.put("cal_max","50000");
-//                jsonBody
                 final ListView listView = (ListView) findViewById(R.id.jsonResults);
                 items = new ArrayList<>();
                 adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, items);
@@ -78,10 +78,6 @@ public class DiarySearch extends AppCompatActivity {
                         Intent intent = new Intent(view.getContext(), SearchItem.class);
                         intent.putExtra("list", selectedFromList);
                         startActivity(intent);
-                      //  myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                       // myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                      //  myIntent.putExtra("id", position);
-                      //  startActivityForResult(myIntent, 0);
                     }
                 });
 
