@@ -1,42 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:weightSum="1"
-    android:orientation="horizontal"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/intro_menu"
-    android:background="#ff000000"
-    tools:context="com.example.katelynsuhr.boozebuddy.IntroMenu">
-
-
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="click me"
-        android:layout_weight="0.5"
-        />
-
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="click me"
-        android:layout_weight="0.5"
-        />
-
-    <Button
-        android:layout_width="0dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
         android:layout_height="0dp"
-        android:text="click me"
-        android:layout_weight="0.5"
-        />
-
-    <Button
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/shotbutton"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="shotbutton"
+            android:scaleType="fitXY"
+            android:background="@android:color/transparent"
+            android:padding="0dp"
+            android:src="@mipmap/shotglass_outline"
+         />
+        <ImageButton
+            android:id="@+id/beerbutton"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="beerbutton"
+            android:scaleType="fitXY"
+            android:background="@android:color/transparent"
+            android:padding="0dp"
+            android:src="@mipmap/beeroutline"
+         />
+    </LinearLayout>
+    <LinearLayout
         android:layout_height="0dp"
-        android:text="click me"
-        android:layout_weight="0.5"
-        />
-
-
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/winebutton"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="winebutton"
+            android:scaleType="fitXY"
+            android:background="@android:color/transparent"
+            android:padding="0dp"
+            android:src="@mipmap/wineoutline"
+            />
+        <ImageButton
+            android:id="@+id/solobutton"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="solobutton"
+            android:scaleType="fitXY"
+            android:background="@android:color/transparent"
+            android:padding="0dp"
+            android:src="@mipmap/solooutline"
+            />
+    </LinearLayout>
 </LinearLayout>
