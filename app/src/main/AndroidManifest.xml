@@ -49,9 +49,11 @@
         <activity
             android:name=".contactsearch"
             android:label="@string/title_activity_contactsearch"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".CalculatorSpending"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CalculatorSpending"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SearchItem"></activity>
     </application>
 
 </manifest>

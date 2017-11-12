@@ -14,6 +14,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,45 +29,79 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.zxing.Result;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 import static android.Manifest.permission.CAMERA;
 
 public class DiarySearch extends AppCompatActivity {
+    ArrayAdapter<String> adapter;
+    List<String>items;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_search);
+
+    }
+    public void scanRequest (View view){
+        Intent intent = new Intent(DiarySearch.this, DiaryMain.class);
+        startActivity(intent);
     }
 
+    //When user hits search
     public void sendRequest(View view){
-        final TextView textView = (TextView) findViewById(R.id.tvJsonItem);
         TextView input = (TextView) findViewById(R.id.drinkInput);
+            try {
+                final JSONObject jsonBody = new JSONObject();
+                RequestQueue requestQueue = Volley.newRequestQueue(this);
+                String url = "https://api.nutritionix.com/v1_1/search";
+                jsonBody.put("appId", "82c97058");
+                jsonBody.put("appKey", "979eb4ea51a7fd11e7b5df0cae3dfd73");
+                jsonBody.put("query", input.getText());
+                final ListView listView = (ListView) findViewById(R.id.jsonResults);
+                items = new ArrayList<>();
+                adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, items);
+                listView.setAdapter(adapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String selectedFromList = (String) (listView.getItemAtPosition(position));
+                        System.out.print(position);
+                        System.out.print(selectedFromList);
+                        Intent intent = new Intent(view.getContext(), SearchItem.class);
+                        intent.putExtra("list", selectedFromList);
+                        startActivity(intent);
+                    }
+                });
 
-        try {
-
-            //Instantiate the RequestQueue
-            RequestQueue requestQueue = Volley.newRequestQueue(this);
-            requestQueue.getCache().clear();
-            String url = "https://api.nutritionix.com/v1_1/search";
-            JSONObject jsonBody = new JSONObject();
-            jsonBody.put("appId", "82c97058");
-            jsonBody.put("appKey", "979eb4ea51a7fd11e7b5df0cae3dfd73");
-            jsonBody.put("query", input.getText());
-            //final String requestBody = jsonBody.toString();
-
-
-            //Request a string response form the provided URL
-            JsonObjectRequest jsnRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody,
+                //Request a string response form the provided URL
+                JsonObjectRequest jsnRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            //Display the first 500 characters of the resposne
-                            // textView.setText("Response is:" + response.substring(0, 500));
-                            Log.i("VOLLEY",response.toString());
+                            Log.i("VOLLEY", response.toString());
+                            try {
+                                JSONArray jsonArray = response.getJSONArray("hits");
+                                for(int i = 0; i< jsonArray.length(); i++){
+                                    JSONObject obj = jsonArray.getJSONObject(i);
+                                    String field = obj.getString("fields");
+                                    JSONObject details = new JSONObject(field);
+                                    String name = details.getString("item_name");
+                                    String brand = details.getString("brand_name");
+                                  // String calories = details.getString("nf_calories");
+                                    items.add(name+"\n"+brand+"\n"+"\n\n");
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            adapter.notifyDataSetChanged();
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -73,13 +111,15 @@ public class DiarySearch extends AppCompatActivity {
                 }
             });
             requestQueue.add(jsnRequest);
-        } catch(JSONException e)
-
-        {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
     }
-}
+
+        }
+//}
 
 
         //implements ZXingScannerView.ResultHandler{

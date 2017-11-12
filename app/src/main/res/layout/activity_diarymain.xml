@@ -1,19 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.katelynsuhr.boozebuddy.DiaryMain">
+    android:weightSum="1"
+    android:layout_weight="0.6"
+    android:background="@drawable/background_color"
+    android:drawableLeft="@mipmap/borderhouse"
+    android:drawablePadding="2dip"
+    android:drawableStart="@mipmap/borderhouse">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="305dp"
+        android:alpha="0.85"
+        android:background="@drawable/trees"
+        android:drawableLeft="@mipmap/borderhouse"
+        android:drawablePadding="2dip"
+        android:drawableStart="@mipmap/borderhouse"
+        android:weekNumberColor="#000" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Add Food"
-        android:onClick="foodClick"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/my_drinks"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
+            android:paddingRight="0dp"
+            android:text="@string/my_drinks"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:drawableLeft="@drawable/ic_add_circle_outline_black_24dp"
+            android:background="@drawable/background_transparent"
+            android:drawablePadding="2dip"
+            android:onClick="foodClick"
+            android:textSize="12sp" />
+        <!--android:text="Add Drink"-->
+
+    </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/drink_listview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#FFFFFF"
+        android:layout_weight="1"
+        android:divider="#5aa49f"
+        android:dividerHeight="2px"/>
+
+
+
+</LinearLayout>

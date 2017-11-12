@@ -1,46 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="368dp"
-    android:layout_height="495dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.katelynsuhr.boozebuddy.DiarySearch"
+    tools:layout_editor_absoluteX="8dp"
     tools:layout_editor_absoluteY="8dp"
-    tools:layout_editor_absoluteX="8dp">
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="1">
 
     <EditText
         android:id="@+id/drinkInput"
-        android:layout_width="385dp"
-        android:layout_height="wrap_content"
-        android:hint="Search a Drink"
-        android:inputType="textFilter" />
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="#FFFF"
+        android:hint="@string/search_a_drink"
+        android:inputType="textFilter"
+        android:layout_weight="1.00"
+        android:paddingLeft="20dp"
+        android:paddingStart="20dp"
+        android:paddingRight="0dp"
+        android:paddingEnd="0dp"/>
+
+    <Button
+        android:id="@+id/scannerButton"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:onClick="scanRequest"
+        android:background="@drawable/barcode"
+        android:drawablePadding="2dip" />
     <Button
         android:id="@+id/queryButton"
-        android:layout_width="wrap_content"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:onClick="sendRequest"
-        style="@style/Base.Widget.AppCompat.Button.Borderless"
-        android:text="Search"/>
+        android:text="@string/search"
+        android:background="@drawable/background_color"
+        android:drawablePadding="2dip" />
+
+</LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
+
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:indeterminate="true"
             android:layout_centerHorizontal="true"
+            android:indeterminate="true"
             android:visibility="gone" />
-        <ScrollView
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/tvJsonItem"
-                android:text="Hello world!"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </ScrollView>
+            android:layout_height="30dp"
+            android:id="@+id/textView" />
+
+        <ListView
+            android:id="@+id/jsonResults"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFF"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/textView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
     </RelativeLayout>
 </LinearLayout>

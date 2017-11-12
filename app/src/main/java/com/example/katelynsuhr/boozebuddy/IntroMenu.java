@@ -9,6 +9,7 @@ import android.view.View;
 
 public class IntroMenu extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +18,10 @@ public class IntroMenu extends AppCompatActivity {
 
     public void homeClick(View view){
         Intent intent = new Intent(IntroMenu.this, IntroMenu.class);
+        startActivity(intent);
+    }
+    public void diary_main (View view){
+        Intent intent = new Intent(IntroMenu.this, DiaryMain.class);
         startActivity(intent);
     }
 

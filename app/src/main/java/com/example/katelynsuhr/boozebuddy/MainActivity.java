@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,10 +20,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void intro_party (View view){
-        Intent intent = new Intent(MainActivity.this, partymode.class);
-        startActivity(intent);
-    }
+//    public void intro_party (View view){
+//        Intent intent = new Intent(MainActivity.this, partymode.class);
+//        startActivity(intent);
+//    }
 
     public void intro_profile (View view){
         Intent intent = new Intent(MainActivity.this, UserProfile.class);
