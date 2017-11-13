@@ -82,7 +82,6 @@ public class DiarySearch extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-//
         //Request a string response form the provided URL
         JsonObjectRequest jsnRequest = new JsonObjectRequest(Request.Method.GET,  finalUrl,(JSONObject) null,
             new Response.Listener<JSONObject>() {
@@ -98,7 +97,7 @@ public class DiarySearch extends AppCompatActivity {
                             String name = details.getString("item_name");
                             String brand = details.getString("brand_name");
                             String calories = details.getString("nf_calories");
-                            items.add(name+"\n"+brand+"\n"+"\n"+calories+"\n");
+                            items.add(name+"\n"+brand+"\n"+calories+"\n");
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -111,37 +110,13 @@ public class DiarySearch extends AppCompatActivity {
                 // textView.setText("That didn't work");
                 Log.e("VOLLEY", error.toString());
             }
-        });//{
-//                @Override
-//                public Map<String, String> getHeaders() throws AuthFailureError {
-//                    Map<String, String>  params = new HashMap<String, String>();
-//                    params.put("fields", list.toString());
-//
-//                    return params;
-//                }
-//            };
-
-      //  }
-
-          //  };
-        //}); //{
-//            @Override
-//            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("fields", "nf_calories");
-//                return params;
-//            }
-//        };
-  //  });
-
-        //   }
+        });
         requestQueue.add(jsnRequest);
 
 
     }
 
         }
-//}
 
 
         //implements ZXingScannerView.ResultHandler{
