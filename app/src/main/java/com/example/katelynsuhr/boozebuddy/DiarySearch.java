@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -34,7 +35,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -58,62 +61,67 @@ public class DiarySearch extends AppCompatActivity {
     //When user hits search
     public void sendRequest(View view){
         TextView input = (TextView) findViewById(R.id.drinkInput);
-            try {
-                final JSONObject jsonBody = new JSONObject();
-                RequestQueue requestQueue = Volley.newRequestQueue(this);
-                String url = "https://api.nutritionix.com/v1_1/search";
-                jsonBody.put("appId", "82c97058");
-                jsonBody.put("appKey", "979eb4ea51a7fd11e7b5df0cae3dfd73");
-                jsonBody.put("query", input.getText());
-                final ListView listView = (ListView) findViewById(R.id.jsonResults);
-                items = new ArrayList<>();
-                adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, items);
-                listView.setAdapter(adapter);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        String selectedFromList = (String) (listView.getItemAtPosition(position));
-                        System.out.print(position);
-                        System.out.print(selectedFromList);
-                        Intent intent = new Intent(view.getContext(), SearchItem.class);
-                        intent.putExtra("list", selectedFromList);
-                        startActivity(intent);
-                    }
-                });
+        //  final JSONObject jsonBody = new JSONObject();
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        final String url = "https://api.nutritionix.com/v1_1/search";
+//                jsonBody.put("appId", "82c97058");
+//                jsonBody.put("appKey", "979eb4ea51a7fd11e7b5df0cae3dfd73");
+//                jsonBody.put("query", input.getText());
+        final ListView listView = (ListView) findViewById(R.id.jsonResults);
+        items = new ArrayList<>();
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, items);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedFromList = (String) (listView.getItemAtPosition(position));
+                System.out.print(position);
+                System.out.print(selectedFromList);
+                Intent intent = new Intent(view.getContext(), SearchItem.class);
+                intent.putExtra("list", selectedFromList);
+                startActivity(intent);
+            }
+        });
 
-                //Request a string response form the provided URL
-                JsonObjectRequest jsnRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Log.i("VOLLEY", response.toString());
-                            try {
-                                JSONArray jsonArray = response.getJSONArray("hits");
-                                for(int i = 0; i< jsonArray.length(); i++){
-                                    JSONObject obj = jsonArray.getJSONObject(i);
-                                    String field = obj.getString("fields");
-                                    JSONObject details = new JSONObject(field);
-                                    String name = details.getString("item_name");
-                                    String brand = details.getString("brand_name");
-                                  // String calories = details.getString("nf_calories");
-                                    items.add(name+"\n"+brand+"\n"+"\n\n");
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            adapter.notifyDataSetChanged();
-                        }
-                    }, new Response.ErrorListener() {
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("appId", "82c97058");
+        params.put("appKey", "979eb4ea51a7fd11e7b5df0cae3dfd73");
+        params.put("query", input.getText().toString());
+        params.put("cal_min", "0");
+        params.put("cal_max","5000");
+
+        //Request a string response form the provided URL
+        JsonObjectRequest jsnRequest = new JsonObjectRequest( url, new JSONObject(params),
+            new Response.Listener<JSONObject>() {
                 @Override
-                public void onErrorResponse(VolleyError error) {
-                    // textView.setText("That didn't work");
-                    Log.e("VOLLEY", error.toString());
+                public void onResponse(JSONObject response) {
+                    Log.i("VOLLEY", response.toString());
+                    try {
+                        JSONArray jsonArray = response.getJSONArray("hits");
+                        for(int i = 0; i< jsonArray.length(); i++){
+                            JSONObject obj = jsonArray.getJSONObject(i);
+                            String field = obj.getString("fields");
+                            JSONObject details = new JSONObject(field);
+                            String name = details.getString("item_name");
+                            String brand = details.getString("brand_name");
+                          // String calories = details.getString("nf_calories");
+                            items.add(name+"\n"+brand+"\n"+"\n\n");
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    adapter.notifyDataSetChanged();
                 }
-            });
-            requestQueue.add(jsnRequest);
-        } catch (JSONException e) {
-            e.printStackTrace();
+            }, new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            // textView.setText("That didn't work");
+            Log.e("VOLLEY", error.toString());
         }
+    });
+
+        //   }
+        requestQueue.add(jsnRequest);
 
 
     }
