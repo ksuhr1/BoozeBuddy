@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.example.katelynsuhr.boozebuddy;
 
 import android.os.Bundle;
@@ -18,7 +18,6 @@ public class partymode extends AppCompatActivity {
 
 
 }
-=======
 //package com.example.katelynsuhr.boozebuddy;
 //
 //import android.os.Bundle;
@@ -48,4 +47,3 @@ public class partymode extends AppCompatActivity {
 //    }
 //
 //}
->>>>>>> c90be2d59e0aadc8c3bf8e4429f7115ff7acf4f2
