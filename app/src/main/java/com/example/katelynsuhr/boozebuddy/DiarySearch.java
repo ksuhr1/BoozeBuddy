@@ -34,6 +34,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -61,12 +62,11 @@ public class DiarySearch extends AppCompatActivity {
     //When user hits search
     public void sendRequest(View view){
         TextView input = (TextView) findViewById(R.id.drinkInput);
-        //  final JSONObject jsonBody = new JSONObject();
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        final String url = "https://api.nutritionix.com/v1_1/search";
-//                jsonBody.put("appId", "82c97058");
-//                jsonBody.put("appKey", "979eb4ea51a7fd11e7b5df0cae3dfd73");
-//                jsonBody.put("query", input.getText());
+        //String item = input.getText();
+        final String leftUrl = "https://api.nutritionix.com/v1_1/search/";
+        final String rightUrl = "?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id%2Cnf_calories&appId=82c97058&appKey=979eb4ea51a7fd11e7b5df0cae3dfd73";
+        final String finalUrl = leftUrl +input.getText()+ rightUrl;
         final ListView listView = (ListView) findViewById(R.id.jsonResults);
         items = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, items);
@@ -82,16 +82,8 @@ public class DiarySearch extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("appId", "82c97058");
-        params.put("appKey", "979eb4ea51a7fd11e7b5df0cae3dfd73");
-        params.put("query", input.getText().toString());
-        params.put("cal_min", "0");
-        params.put("cal_max","5000");
-
         //Request a string response form the provided URL
-        JsonObjectRequest jsnRequest = new JsonObjectRequest( url, new JSONObject(params),
+        JsonObjectRequest jsnRequest = new JsonObjectRequest(Request.Method.GET,  finalUrl,(JSONObject) null,
             new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
@@ -104,8 +96,8 @@ public class DiarySearch extends AppCompatActivity {
                             JSONObject details = new JSONObject(field);
                             String name = details.getString("item_name");
                             String brand = details.getString("brand_name");
-                          // String calories = details.getString("nf_calories");
-                            items.add(name+"\n"+brand+"\n"+"\n\n");
+                            String calories = details.getString("nf_calories");
+                            items.add(name+"\n"+brand+"\n"+calories+"\n");
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -113,21 +105,18 @@ public class DiarySearch extends AppCompatActivity {
                     adapter.notifyDataSetChanged();
                 }
             }, new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            // textView.setText("That didn't work");
-            Log.e("VOLLEY", error.toString());
-        }
-    });
-
-        //   }
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // textView.setText("That didn't work");
+                Log.e("VOLLEY", error.toString());
+            }
+        });
         requestQueue.add(jsnRequest);
 
 
     }
 
         }
-//}
 
 
         //implements ZXingScannerView.ResultHandler{
