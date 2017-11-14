@@ -4,9 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.katelynsuhr.boozebuddy.UserProfile"
-    tools:showIn="@layout/activity_user_profile">
+    android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/entercontact"
@@ -14,7 +12,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="@string/name"
         android:layout_marginTop="3dp"
         android:layout_marginLeft="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -24,7 +22,7 @@
         android:id="@+id/searchcontact"
         android:layout_width="83dp"
         android:layout_height="39dp"
-        android:text="Search"
+        android:text="@string/search"
         android:layout_marginRight="20dp"
         android:onClick="editcontact"
         app:layout_constraintTop_toTopOf="parent"
@@ -44,7 +42,7 @@
         android:id="@+id/displaycontact"
         android:layout_width="355dp"
         android:layout_height="41dp"
-        android:text="TextView"
+        android:text="@string/textview"
         android:layout_marginTop="60dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

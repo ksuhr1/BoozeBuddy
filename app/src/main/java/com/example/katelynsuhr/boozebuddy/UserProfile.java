@@ -18,13 +18,13 @@ public class UserProfile extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void safety_main (View view){
-        Intent intent = new Intent(UserProfile.this, safety.class);
+    public void party_main (View view){
+        Intent intent = new Intent(UserProfile.this, partymode.class);
         startActivity(intent);
     }
 
-    public void party_main (View view){
-        Intent intent = new Intent(UserProfile.this, partymode.class);
+    public void userinfo (View view) {
+        Intent intent = new Intent(UserProfile.this, UserInfo.class);
         startActivity(intent);
     }
 

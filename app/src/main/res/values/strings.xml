@@ -13,4 +13,14 @@
     <string name="my_drinks">My Drinks</string>
     <string name="search_a_drink">Search a Drink</string>
     <string name="search">Search</string>
+    <string name="edit_information">Edit Information</string>
+    <string name="name">Name</string>
+    <string name="weight">Weight</string>
+    <string name="height">Height</string>
+    <string name="age">Age</string>
+    <string name="sex">Sex</string>
+    <string name="edit_contacts">Edit Contacts</string>
+    <string name="save_information">Save Information</string>
+    <string name="textview">TextView</string>
+    <string name="title_activity_baccalculator">BACCalculator</string>
 </resources>
