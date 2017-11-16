@@ -1,110 +1,96 @@
 package com.example.katelynsuhr.boozebuddy;
 
-import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
-import android.preference.DialogPreference;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.zxing.Result;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
-
-import static android.Manifest.permission.CAMERA;
 
 public class DiarySearch extends AppCompatActivity {
-    ArrayAdapter<String> adapter;
-    List<String>items;
+    public static List<Nutrition> nutritionList = new ArrayList<>();
+    private ListView listView;
+    public Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_search);
 
+        listView = (ListView) findViewById(R.id.jsonResults);
+        adapter = new Adapter(this, nutritionList);
+        listView.setAdapter(adapter);
     }
-    public void scanRequest (View view){
+
+    public void scanRequest(View view) {
         Intent intent = new Intent(DiarySearch.this, DiaryMain.class);
         startActivity(intent);
     }
 
     //When user hits search
-    public void sendRequest(View view){
+    public void sendRequest(View view) {
         TextView input = (TextView) findViewById(R.id.drinkInput);
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        //String item = input.getText();
         final String leftUrl = "https://api.nutritionix.com/v1_1/search/";
         final String rightUrl = "?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id%2Cnf_calories&appId=82c97058&appKey=979eb4ea51a7fd11e7b5df0cae3dfd73";
         final String finalUrl = leftUrl +input.getText()+ rightUrl;
-        final ListView listView = (ListView) findViewById(R.id.jsonResults);
-        items = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, items);
-        listView.setAdapter(adapter);
+
+        nutritionList.clear();
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selectedFromList = (String) (listView.getItemAtPosition(position));
-                System.out.print(position);
-                System.out.print(selectedFromList);
-                Intent intent = new Intent(view.getContext(), SearchItem.class);
-                intent.putExtra("list", selectedFromList);
+                Nutrition selectedFromList = (Nutrition) listView.getItemAtPosition(position);
+                Log.i("POSITION", selectedFromList.toString());
+                Intent intent = new Intent(view.getContext(), DrinkOutput.class);
+                intent.putExtra("item_id", selectedFromList.getItemId());
+                intent.putExtra("brand_name", selectedFromList.getBrandName());
                 startActivity(intent);
+
             }
         });
+
         //Request a string response form the provided URL
-        JsonObjectRequest jsnRequest = new JsonObjectRequest(Request.Method.GET,  finalUrl,(JSONObject) null,
-            new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    Log.i("VOLLEY", response.toString());
-                    try {
-                        JSONArray jsonArray = response.getJSONArray("hits");
-                        for(int i = 0; i< jsonArray.length(); i++){
-                            JSONObject obj = jsonArray.getJSONObject(i);
-                            String field = obj.getString("fields");
-                            JSONObject details = new JSONObject(field);
-                            String name = details.getString("item_name");
-                            String brand = details.getString("brand_name");
-                            String calories = details.getString("nf_calories");
-                            items.add(name+"\n"+brand+"\n"+calories+"\n");
+        JsonObjectRequest jsnRequest = new JsonObjectRequest(Request.Method.GET, finalUrl, (JSONObject) null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("VOLLEY", response.toString());
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("hits");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject obj = jsonArray.getJSONObject(i);
+                                String field = obj.getString("fields");
+                                JSONObject details = new JSONObject(field);
+                                Nutrition drink = new Nutrition();
+                                drink.setItemName(details.getString("item_name"));
+                                drink.setBrandName(details.getString("brand_name"));
+                                drink.setCalories(details.getString("nf_calories"));
+                                drink.setItemId(details.getString("item_id"));
+                                nutritionList.add(drink);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                        adapter.notifyDataSetChanged();
                     }
-                    adapter.notifyDataSetChanged();
-                }
-            }, new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 // textView.setText("That didn't work");
@@ -114,12 +100,12 @@ public class DiarySearch extends AppCompatActivity {
         requestQueue.add(jsnRequest);
 
 
+
     }
 
-        }
+}
 
-
-        //implements ZXingScannerView.ResultHandler{
+//implements ZXingScannerView.ResultHandler{
 /*
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView scannerView;
