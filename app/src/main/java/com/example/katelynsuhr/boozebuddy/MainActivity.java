@@ -20,10 +20,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    public void intro_party (View view){
-//        Intent intent = new Intent(MainActivity.this, partymode.class);
-//        startActivity(intent);
-//    }
+    public void intro_party (View view){
+        Intent intent = new Intent(MainActivity.this, partymode.class);
+        startActivity(intent);
+    }
 
     public void intro_profile (View view){
         Intent intent = new Intent(MainActivity.this, UserProfile.class);
