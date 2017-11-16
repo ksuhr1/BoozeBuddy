@@ -39,33 +39,19 @@
             android:label="@string/title_activity_safety"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".contactsearch"
+            android:label="@string/title_activity_contact_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".partymode"
             android:label="partymode"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".contactsearch"
-            android:label="@string/title_activity_contactsearch"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".UserInfo"
-            android:label="UserInfo"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".EditInfo"
-            android:label="EditInfo"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".spendingcalculator"
-            android:label="CalculatorSpending"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".BACCalculator"
-            android:label="@string/title_activity_baccalculator"
-            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".DrinkOutput"
-            android:label="DrinkOutput"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
 

@@ -9,12 +9,26 @@
         android:layout_height="59dp"
         android:text="Drink Name"
         android:textSize="30sp"
-        android:paddingTop="10dp" />
+        android:paddingTop="10dp"
+        android:paddingLeft="20dp"
+        android:paddingStart="20dp"
+        android:textColor="#000"
+        android:background="#FFFF"
+        />
+
     <TextView
         android:id="@id/brandName"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:text="Brand Name"/>
+        android:paddingLeft="20dp"
+        android:paddingStart="20dp"
+        android:text="Brand Name"
+        android:background="#FFF"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,15 +38,16 @@
 
         <TextView
             android:id="@+id/calories"
-            android:layout_width="97dp"
-            android:layout_height="61dp"
-            android:gravity="left"
+            android:layout_width="126dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:paddingRight="30dp"
             android:text="Cal"
-            android:paddingLeft="10dp"
+            android:paddingLeft="20dp"
+            android:paddingStart="20dp"
             android:textAlignment="gravity"
             android:textColor="#000"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -45,13 +60,15 @@
                 android:id="@+id/servingSize"
                 android:layout_width="match_parent"
                 android:layout_height="31dp"
-                android:text="Serving Size" />
+                android:text="Serving Size:" />
 
             <TextView
                 android:id="@+id/numServings"
                 android:layout_width="288dp"
                 android:layout_height="match_parent"
-                android:text="Number of servings" />
+                android:text="Number of servings:" />
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -61,6 +78,10 @@
         </LinearLayout>
 
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
 
     <ListView
         android:id="@+id/macroNutrientResults"

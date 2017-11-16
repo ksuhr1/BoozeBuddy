@@ -54,10 +54,17 @@ import java.util.Map;
             String nutrition = getItem(position);
             String value = map.get(nutrition);
 
+            if(value == null){
+
+                value = ("0");
+            }
+
             TextView nutrientName = (TextView) result.findViewById(R.id.nutrientName);
             TextView nutrientValue = (TextView) result.findViewById(R.id.nutrientValue);
             nutrientName.setText(nutrition);
             nutrientValue.setText(value);
+
+
 
             return result;
         }

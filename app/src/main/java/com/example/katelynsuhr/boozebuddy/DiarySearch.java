@@ -61,6 +61,8 @@ public class DiarySearch extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), DrinkOutput.class);
                 intent.putExtra("item_id", selectedFromList.getItemId());
                 intent.putExtra("brand_name", selectedFromList.getBrandName());
+                intent.putExtra("item_name", selectedFromList.getItemName());
+                intent.putExtra("nf_calories", selectedFromList.getCalories());
                 startActivity(intent);
 
             }
