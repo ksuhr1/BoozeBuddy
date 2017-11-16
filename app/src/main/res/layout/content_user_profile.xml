@@ -28,18 +28,6 @@
         android:layout_marginTop="22dp"
         app:layout_constraintHorizontal_bias="0.914" />
 
-
-    <Button
-        android:id="@+id/PartyMode"
-        android:layout_width="118dp"
-        android:layout_height="46dp"
-        android:text="Party!"
-        android:layout_marginBottom="140dp"
-        android:onClick="party_main"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="93dp"
@@ -87,9 +75,38 @@
         android:layout_width="118dp"
         android:layout_height="46dp"
         android:text="Diary"
-        android:layout_marginBottom="140dp"
-        android:layout_marginLeft="16dp"
         android:onClick="diary_main"
+        app:layout_constraintVertical_bias=".7"
+        app:layout_constraintHorizontal_bias=".05"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <Button
+        android:id="@+id/PartyMode"
+        android:layout_width="118dp"
+        android:layout_height="46dp"
+        android:text="Party!"
+        android:onClick="party_main"
+        app:layout_constraintVertical_bias=".7"
+        app:layout_constraintHorizontal_bias=".5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <Button
+        android:id="@+id/BACcalc"
+        android:layout_width="118dp"
+        android:layout_height="46dp"
+        android:text="BAC"
+        android:onClick="baccalc"
+        app:layout_constraintVertical_bias=".7"
+        app:layout_constraintHorizontal_bias=".95"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         />

@@ -62,6 +62,10 @@
             android:name=".CalculatorSpending"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SearchItem" />
+        <activity
+            android:name=".BACCalculator"
+            android:label="@string/title_activity_baccalculator"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

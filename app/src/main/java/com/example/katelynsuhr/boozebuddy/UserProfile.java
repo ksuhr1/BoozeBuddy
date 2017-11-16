@@ -28,6 +28,11 @@ public class UserProfile extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void baccalc (View view){
+        Intent intent = new Intent(UserProfile.this, BACCalculator.class);
+        startActivity(intent);
+    }
+
 }
 
 
