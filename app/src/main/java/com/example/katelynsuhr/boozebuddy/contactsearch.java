@@ -57,11 +57,18 @@ public class contactsearch extends Activity {
 
     }
 
-    public void searchcontacts (View view){
+    public void blockcontact (View view){
         EditText entercontact = (EditText)findViewById(R.id.entercontact);
         String name = entercontact.getText().toString();
         entercontact.setText(getContactDisplayNameByNumber(name));
     }
+
+    public void addcontact (View view){
+        EditText entercontact = (EditText)findViewById(R.id.entercontact);
+        String name = entercontact.getText().toString();
+        entercontact.setText(getContactDisplayNameByNumber(name));
+    }
+
     public String getContactDisplayNameByNumber(String number) {
         Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
         String name = "?";
