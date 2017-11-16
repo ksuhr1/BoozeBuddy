@@ -51,7 +51,7 @@ public class EditInfo extends AppCompatActivity {
     }
 
     public void editcontacts(View view){
-        Intent intent = new Intent(EditInfo.this, ContactView.class);
+        Intent intent = new Intent(EditInfo.this, contactsearch.class);
         startActivity(intent);
     }
 

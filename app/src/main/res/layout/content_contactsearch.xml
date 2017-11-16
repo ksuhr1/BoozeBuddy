@@ -25,12 +25,23 @@
         android:text="Name"
         app:layout_constraintLeft_toLeftOf="parent" />
 
-    <Button
-        android:id="@+id/searchcontacts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
+    <ImageButton
+        android:id="@+id/blockcontact"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/block"
         android:layout_marginRight="3dp"
+        android:onClick="searchcontacts"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ImageButton
+        android:id="@+id/addcontact"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/add"
+        android:layout_marginRight="50dp"
         android:onClick="searchcontacts"
         app:layout_constraintRight_toRightOf="parent" />
 

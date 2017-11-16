@@ -39,10 +39,6 @@
             android:label="@string/title_activity_safety"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ContactView"
-            android:label="@string/title_activity_contact_view"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".partymode"
             android:label="partymode"
             android:theme="@style/AppTheme.NoActionBar" />

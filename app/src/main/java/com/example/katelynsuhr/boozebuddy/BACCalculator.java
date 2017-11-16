@@ -75,7 +75,9 @@ public class BACCalculator extends AppCompatActivity {
 
                     BACDouble = (((drinkDouble * 12 * 0.05) * 5.14) / (weightDouble * genderConstant)) - (0.015 * timeDouble);
                     DecimalFormat newDouble = new DecimalFormat("#.###");
-
+                    if(BACDouble> .08){
+                        Toast.makeText(BACCalculator.this, "You are over the legal limit", Toast.LENGTH_SHORT).show();
+                    }
                     BAC.setText(newDouble.format(BACDouble) + " % BAC");
                 }
             }
