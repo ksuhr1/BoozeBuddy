@@ -52,6 +52,8 @@
         <activity
             android:name=".DrinkOutput"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".UserInfo"/>
+        <activity android:name=".BACCalculator"/>
 
     </application>
 

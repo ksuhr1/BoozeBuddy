@@ -30,7 +30,6 @@ public class UserInfo extends AppCompatActivity {
     public void edituserinfo (View view){
         Intent intent = new Intent(UserInfo.this, EditInfo.class);
         startActivity(intent);
-
     }
 
 }
