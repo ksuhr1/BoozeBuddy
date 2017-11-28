@@ -28,10 +28,10 @@ public class BoozeFiles {
             this.file = new File(path, name);
         }
 
-        BoozeFiles(int date, String category, Context context){
+        BoozeFiles(String name, int date, String category, Context context){
             this.category = category;
             this.path = context.getFilesDir();
-            this.file = new File(path, Integer.toString(date));
+            this.file = new File(path, name);
             this.date = date;
         }
 
@@ -141,7 +141,6 @@ public class BoozeFiles {
 
     void deleteFile(BoozeFiles file){
         file.file.delete();
-        file.path.delete();
     }
 
     String readFile(BoozeFiles file) {

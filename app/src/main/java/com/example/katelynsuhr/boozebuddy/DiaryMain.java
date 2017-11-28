@@ -23,19 +23,11 @@ public class DiaryMain extends AppCompatActivity {
 
     private static final String TAG = "CalendarActivity";
     private CalendarView mCalendarView;
-    private SharedPreferences savedDrinks;
-   // SharedPreferences preferences;
-    public String description;
-   // public String dateSelect;
-    Date date;
-    long millis;
-   public static final String PREFS_NAME = "MyPrefsFile";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diarymain);
         mCalendarView = (CalendarView)findViewById(R.id.calendarView);
-       // final long selectedDate = mCalendarView.getDate();
         mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView CalendarView, int year, int month, int dayOfMonth) {
@@ -45,17 +37,12 @@ public class DiaryMain extends AppCompatActivity {
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_VERTICAL, 0, 0); //changes position Toast appears
                 toast.show();
                 String date= "" + month + "/" + dayOfMonth + "/" + year;
-
                 SharedPreferences sharedPreferences = getSharedPreferences("DateDetails", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("date",date);
                 editor.apply();
                 Toast toaster = Toast.makeText(getBaseContext(),"Date was saved successfully: "+sharedPreferences.contains("date"),Toast.LENGTH_LONG);
                 toaster.show();
-
-
-
-
             }
         });
 

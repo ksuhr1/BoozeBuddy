@@ -136,7 +136,16 @@ public class DrinkOutput extends AppCompatActivity {
     public void addFood (View view) throws JSONException {
         SharedPreferences sharedPreferences = this.getSharedPreferences("DateDetails", Context.MODE_PRIVATE);
         String date = sharedPreferences.getString("date","none");
+
         Toast.makeText(this, date, Toast.LENGTH_LONG).show();
+        BoozeFiles file = new BoozeFiles("test", "FoodList", DrinkOutput.this);
+        file.deleteFile(file);
+        file.writeDrink(file, details.getString("item_name"),details.getString("nf_calories"),drinkMap.toString());
+        String stringTest = file.readFile(file);
+        Log.d("OUTPUT", stringTest);
+//        final TextView profileName = (TextView)findViewById(R.id.my_drinks);
+//        profileName.setText(file.readNutrients(file));
+      //  Toast.makeText(DrinkOutput.this, stringTest, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(DrinkOutput.this, DiaryMain.class);
         startActivity(intent);
     }
