@@ -39,7 +39,7 @@ public class DiarySearch extends AppCompatActivity {
     }
 
     public void scanRequest(View view) {
-        Intent intent = new Intent(DiarySearch.this, DiaryMain.class);
+        Intent intent = new Intent(DiarySearch.this, Scanner.class);
         startActivity(intent);
     }
 
