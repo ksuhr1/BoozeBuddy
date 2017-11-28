@@ -1,10 +1,12 @@
 package com.example.katelynsuhr.boozebuddy;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -43,6 +45,7 @@ public class DiarySearch extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     //When user hits search
     public void sendRequest(View view) {
         TextView input = (TextView) findViewById(R.id.drinkInput);
@@ -50,8 +53,15 @@ public class DiarySearch extends AppCompatActivity {
         final String leftUrl = "https://api.nutritionix.com/v1_1/search/";
         final String rightUrl = "?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id%2Cnf_calories&appId=82c97058&appKey=979eb4ea51a7fd11e7b5df0cae3dfd73";
         final String finalUrl = leftUrl +input.getText()+ rightUrl;
+        try  {
+            InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        } catch (Exception e) {
+
+        }
 
         nutritionList.clear();
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -104,5 +114,6 @@ public class DiarySearch extends AppCompatActivity {
 
 
     }
+
 
 }

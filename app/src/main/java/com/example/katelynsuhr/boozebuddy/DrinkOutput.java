@@ -1,6 +1,9 @@
 package com.example.katelynsuhr.boozebuddy;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +25,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +44,7 @@ public class DrinkOutput extends AppCompatActivity {
     TextView cal;
     Map<String, String> drinkMap;
     JSONObject details;
-
+    //SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,15 +132,11 @@ public class DrinkOutput extends AppCompatActivity {
         return str;
 
     }
+
     public void addFood (View view) throws JSONException {
-        BoozeFiles file = new BoozeFiles("test", "Diary", DrinkOutput.this);
-        file.deleteFile(file);
-        file.writeDrink(file, details.getString("item_name"),details.getString("nf_calories"),drinkMap.toString());
-        String stringTest = file.readFile(file);
-        Log.d("OUTPUT", stringTest);
-       // final TextView profileName = (TextView)findViewById(R.id.my_drinks);
-       // profileName.setText(file.readNutrients(file));
-       // Toast.makeText(DrinkOutput.this, stringTest, Toast.LENGTH_SHORT).show();
+        SharedPreferences sharedPreferences = this.getSharedPreferences("DateDetails", Context.MODE_PRIVATE);
+        String date = sharedPreferences.getString("date","none");
+        Toast.makeText(this, date, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(DrinkOutput.this, DiaryMain.class);
         startActivity(intent);
     }
