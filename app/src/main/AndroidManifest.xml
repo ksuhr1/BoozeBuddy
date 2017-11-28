@@ -55,6 +55,7 @@
         <activity android:name=".UserInfo"/>
         <activity android:name=".BACCalculator"/>
         <activity android:name=".EditInfo"/>
+        <activity android:name=".Scanner"/>
     </application>
 
 </manifest>
