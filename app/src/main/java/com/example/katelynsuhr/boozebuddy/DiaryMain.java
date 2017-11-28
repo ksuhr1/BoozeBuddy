@@ -36,7 +36,7 @@ public class DiaryMain extends AppCompatActivity {
                         Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_VERTICAL, 0, 0); //changes position Toast appears
                 toast.show();
-                String date= "" + month + "/" + dayOfMonth + "/" + year;
+                String date= "" + month + "_" + dayOfMonth + "_" + year;
                 SharedPreferences sharedPreferences = getSharedPreferences("DateDetails", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("date",date);

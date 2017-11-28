@@ -138,7 +138,7 @@ public class DrinkOutput extends AppCompatActivity {
         String date = sharedPreferences.getString("date","none");
 
         Toast.makeText(this, date, Toast.LENGTH_LONG).show();
-        BoozeFiles file = new BoozeFiles("test", "FoodList", DrinkOutput.this);
+        BoozeFiles file = new BoozeFiles(date, "FoodList", DrinkOutput.this);
         file.deleteFile(file);
         file.writeDrink(file, details.getString("item_name"),details.getString("nf_calories"),drinkMap.toString());
         String stringTest = file.readFile(file);
