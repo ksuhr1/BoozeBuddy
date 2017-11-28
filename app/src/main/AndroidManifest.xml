@@ -54,7 +54,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".UserInfo"/>
         <activity android:name=".BACCalculator"/>
-
+        <activity android:name=".EditInfo"/>
     </application>
 
 </manifest>

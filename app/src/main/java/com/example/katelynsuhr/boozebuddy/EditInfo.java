@@ -43,7 +43,7 @@ public class EditInfo extends AppCompatActivity {
         infoeditor.putString("name" , name.getText().toString());
         infoeditor.putString("weight" , weight.getText().toString());
         infoeditor.putString("height" , height.getText().toString());
-        infoeditor.putString("age" , age.getText().toString());
+        infoeditor.putInt("age" , Integer.parseInt(age.getText().toString()));
         infoeditor.putString("sex" , sex.getText().toString());
         infoeditor.commit();
         finish();
