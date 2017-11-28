@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,11 @@ public class DrinkOutput extends AppCompatActivity {
     private static List<String> charList = new ArrayList<String>();
     private ListView listView;
     public MacroNutrientAdapter adapter;
+    TextView drinkName;
+    TextView brandName;
+    TextView cal;
+    Map<String, String> drinkMap;
+    JSONObject details;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +52,10 @@ public class DrinkOutput extends AppCompatActivity {
         String item = (String) b.getString("item_id");
         sendItemRequest(item);
 
-        TextView drinkName = (TextView)findViewById(R.id.drink);
-        TextView brandName = (TextView)findViewById(R.id.brandName);
+        drinkName = (TextView)findViewById(R.id.drink);
+        brandName = (TextView)findViewById(R.id.brandName);
         TextView numServings = (TextView)findViewById(R.id.numServings);
-        TextView cal = (TextView) findViewById((R.id.calories));
+        cal = (TextView) findViewById((R.id.calories));
         drinkName.setText(getIntent().getStringExtra("item_name"));
         cal.setText(getIntent().getStringExtra("nf_calories"));
         cal.append("\n"+"calories");
@@ -73,8 +79,8 @@ public class DrinkOutput extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         Log.i("VOLLEY", response.toString());
                         try {
-                            JSONObject details = response;
-                            Map<String, String> drinkMap = new TreeMap<String, String>();
+                            details = response;
+                            drinkMap = new TreeMap<String, String>();
                             drinkMap.put(replaceChar("nf_protein"), details.getString("nf_protein"));
                             drinkMap.put(replaceChar("nf_total_carbohydrate"), details.getString("nf_total_carbohydrate"));
                             drinkMap.put(replaceChar("nf_sugars"), details.getString("nf_sugars"));
@@ -121,6 +127,18 @@ public class DrinkOutput extends AppCompatActivity {
         Log.i("CHAR", str);
         return str;
 
+    }
+    public void addFood (View view) throws JSONException {
+        BoozeFiles file = new BoozeFiles("test", "Diary", DrinkOutput.this);
+        file.deleteFile(file);
+        file.writeDrink(file, details.getString("item_name"),details.getString("nf_calories"),drinkMap.toString());
+        String stringTest = file.readFile(file);
+        Log.d("OUTPUT", stringTest);
+       // final TextView profileName = (TextView)findViewById(R.id.my_drinks);
+       // profileName.setText(file.readNutrients(file));
+       // Toast.makeText(DrinkOutput.this, stringTest, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(DrinkOutput.this, DiaryMain.class);
+        startActivity(intent);
     }
 
 }

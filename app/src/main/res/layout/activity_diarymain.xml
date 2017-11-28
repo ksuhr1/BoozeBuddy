@@ -61,11 +61,10 @@
         android:id="@+id/drink_listview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#FFFFFF"
         android:layout_weight="1"
+        android:background="#FFFFFF"
         android:divider="#5aa49f"
-        android:dividerHeight="2px"/>
-
+        android:dividerHeight="2px" />
 
 
 </LinearLayout>

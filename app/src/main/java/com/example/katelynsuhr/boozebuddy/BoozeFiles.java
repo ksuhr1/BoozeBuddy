@@ -2,6 +2,8 @@ package com.example.katelynsuhr.boozebuddy;
 
 import android.content.Context;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -44,11 +46,11 @@ public class BoozeFiles {
 
     }
 
-    void writeDrink(BoozeFiles file, String drink, int calories, String nutrients) {
+    void writeDrink(BoozeFiles file, String drink, String calories, String nutrients) {
         try {
             FileOutputStream writer = new FileOutputStream(file.file, true);
             writer.write((drink + "/").getBytes());
-            writer.write((Integer.toString(calories) + "/").getBytes());
+            writer.write((calories + "/").getBytes());
             writer.write((nutrients + "/").getBytes());
             writer.close();
         } catch (IOException ie) {
@@ -76,8 +78,6 @@ public class BoozeFiles {
             if(c == slash){
                 track++;
             }
-            System.out.println(track);
-            System.out.println(drink);
             if(track%3 == 0){
                 drink = drink + Character.toString(c);
             }
@@ -105,8 +105,6 @@ public class BoozeFiles {
             if(c == slash){
                 track++;
             }
-            System.out.println(track);
-            System.out.println(calories);
             if(track%3 == 1){
                 calories = calories + Character.toString(c);
             }
@@ -134,8 +132,6 @@ public class BoozeFiles {
             if(c == slash){
                 track++;
             }
-            System.out.println(track);
-            System.out.println(nutrients);
             if(track%3 == 2){
                 nutrients = nutrients + Character.toString(c);
             }

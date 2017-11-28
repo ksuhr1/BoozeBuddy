@@ -7,7 +7,7 @@
     tools:context="com.example.katelynsuhr.boozebuddy.MainActivity"
     android:background="@drawable/background_color">
     <TextView
-        android:id="@+id/profilename"
+        android:id="@+id/profileName"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:text="TextView"
@@ -118,7 +118,7 @@
         />
 
     <Button
-        android:id="@+id/filetest"
+        android:id="@+id/fileTest"
         android:layout_width="118dp"
         android:layout_height="46dp"
         android:text="Test"
