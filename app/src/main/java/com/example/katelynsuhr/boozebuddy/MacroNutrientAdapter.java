@@ -54,7 +54,7 @@ import java.util.Map;
             String nutrition = getItem(position);
             String value = map.get(nutrition);
 
-            if(value == null){
+            if(value.equals("null")){
 
                 value = ("0");
             }
