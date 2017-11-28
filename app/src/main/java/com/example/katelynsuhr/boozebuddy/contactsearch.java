@@ -6,12 +6,15 @@ package com.example.katelynsuhr.boozebuddy;
         import android.app.Activity;
         import android.app.ProgressDialog;
         import android.content.ContentResolver;
+        import android.content.ContentValues;
+        import android.content.Context;
         import android.content.pm.PackageManager;
         import android.database.Cursor;
         import android.net.Uri;
         import android.os.Bundle;
         import android.os.Handler;
         import android.provider.BaseColumns;
+        import android.provider.BlockedNumberContract;
         import android.provider.ContactsContract;
         import android.support.v4.app.ActivityCompat;
         import android.support.v4.content.ContextCompat;
@@ -75,7 +78,7 @@ public class contactsearch extends Activity {
 
         ContentResolver contentResolver = getContentResolver();
         Cursor contactLookup = contentResolver.query(uri, new String[] {BaseColumns._ID,
-                ContactsContract.PhoneLookup.DISPLAY_NAME }, null, null, null);
+                ContactsContract.PhoneLookup.DISPLAY_NAME}, null, null, null);
 
         try {
             if (contactLookup != null && contactLookup.getCount() > 0) {
@@ -92,6 +95,23 @@ public class contactsearch extends Activity {
         return name;
     }
 
+    public void blockNumber(String number) {
+        Context.startActivity(telecomManager.createManageBlockedNumbersIntent(), null);
+        Cursor c = getContentResolver().query(BlockedNumberContract.BlockedNumbers.CONTENT_URI,
+                new String[]{BlockedNumberContract.BlockedNumbers.COLUMN_ID,
+                        BlockedNumberContract.BlockedNumbers.COLUMN_ORIGINAL_NUMBER,
+                        BlockedNumberContract.BlockedNumbers.COLUMN_E164_NUMBER}, null, null, null);
 
+
+        ContentValues values = new ContentValues();
+        values.put(BlockedNumberContract.BlockedNumbers.COLUMN_ORIGINAL_NUMBER, "1234567890");
+        Uri uri = getContentResolver().insert(BlockedNumberContract.BlockedNumbers.CONTENT_URI, values);
+
+        ContentValues values = new ContentValues();
+        values.put(BlockedNumberContract.BlockedNumbers.COLUMN_ORIGINAL_NUMBER, "1234567890");
+        Uri uri = getContentResolver().insert(BlockedNumberContract.BlockedNumbers.CONTENT_URI, values);
+        getContentResolver().delete(uri, null, null);
+
+    }
 
 }
