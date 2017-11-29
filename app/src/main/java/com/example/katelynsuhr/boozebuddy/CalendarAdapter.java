@@ -23,7 +23,8 @@ public class CalendarAdapter extends BaseAdapter{
     private TextView calories ;
 
 
-    public Adapter(Activity activity, List<BoozeFiles> items){
+
+    public CalendarAdapter(Activity activity, List<BoozeFiles> items){
         this.activity = activity;
         this.drinks = items;
     }
@@ -58,11 +59,11 @@ public class CalendarAdapter extends BaseAdapter{
         brandName=(TextView)convertView.findViewById(R.id.brandName);
         calories=(TextView)convertView.findViewById(R.id.calories);
 
-        BoozeFiles   drink=drinks.get(position);
+        BoozeFiles drink=drinks.get(position);
 
-        itemName.setText(drink.readDrink(file));
-        brandName.setText(drink.getBrandName());
-        calories.setText(drink.getCalories());
+        itemName.setText(drink.readDrink(drink));
+       //` brandName.setText(drink.getBrandName());
+        calories.setText(drink.readCalories(drink));
 
         return convertView;
     }

@@ -46,7 +46,7 @@ public class DrinkOutput extends AppCompatActivity {
     Map<String, String> drinkMap;
     JSONObject details;
     private ListView listView2;
-    public Adapter adapter2;
+    public CalendarAdapter adapter2;
     public static List<BoozeFiles> nutritionList = new ArrayList<>();
     //SharedPreferences preferences;
     @Override
@@ -149,7 +149,7 @@ public class DrinkOutput extends AppCompatActivity {
         Log.d("OUTPUT", stringTest);
 
         listView2 = (ListView) findViewById(R.id.drink_listview);
-        adapter2 = new Adapter(DiarySearch.class, nutritionList);
+        adapter2 = new CalendarAdapter(this, nutritionList);
         listView2.setAdapter(adapter2);
         listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
