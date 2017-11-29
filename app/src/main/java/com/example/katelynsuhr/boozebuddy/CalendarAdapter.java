@@ -13,16 +13,17 @@ import java.util.List;
 /**
  * Created by katelynsuhr on 11/28/17.
  */
-/*
+
 public class CalendarAdapter extends BaseAdapter{
     private LayoutInflater inflater;
     private Activity activity;
-    private List<Nutrition> drinks;
+    private List<BoozeFiles> drinks;
     private TextView itemName ;
     private TextView  brandName;
     private TextView calories ;
 
-    public Adapter(Activity activity, List<Nutrition> items){
+
+    public Adapter(Activity activity, List<BoozeFiles> items){
         this.activity = activity;
         this.drinks = items;
     }
@@ -57,9 +58,9 @@ public class CalendarAdapter extends BaseAdapter{
         brandName=(TextView)convertView.findViewById(R.id.brandName);
         calories=(TextView)convertView.findViewById(R.id.calories);
 
-        Nutrition drink=drinks.get(position);
+        BoozeFiles   drink=drinks.get(position);
 
-        itemName.setText(drink.getItemName());
+        itemName.setText(drink.readDrink(file));
         brandName.setText(drink.getBrandName());
         calories.setText(drink.getCalories());
 
@@ -67,4 +68,3 @@ public class CalendarAdapter extends BaseAdapter{
     }
 
 }
-*/

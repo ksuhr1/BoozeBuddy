@@ -149,7 +149,7 @@ public class DrinkOutput extends AppCompatActivity {
         Log.d("OUTPUT", stringTest);
 
         listView2 = (ListView) findViewById(R.id.drink_listview);
-        adapter2 = new Adapter(this,nutritionList);
+        adapter2 = new Adapter(DiarySearch.class, nutritionList);
         listView2.setAdapter(adapter2);
         listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -161,7 +161,6 @@ public class DrinkOutput extends AppCompatActivity {
                 intent.putExtra("drink", selectedFromList.readDrink(file));
                 intent.putExtra("calories", selectedFromList.readCalories(file));
                 intent.putExtra("nutrients", selectedFromList.readNutrients(file));
-                //listView2.setAdapter(adapter2);
                 startActivity(intent);
 
             }
