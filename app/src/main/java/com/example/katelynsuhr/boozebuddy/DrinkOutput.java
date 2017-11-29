@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +45,9 @@ public class DrinkOutput extends AppCompatActivity {
     TextView cal;
     Map<String, String> drinkMap;
     JSONObject details;
+    private ListView listView2;
+    public Adapter adapter2;
+    public static List<BoozeFiles> nutritionList = new ArrayList<>();
     //SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,18 +140,38 @@ public class DrinkOutput extends AppCompatActivity {
     public void addFood (View view) throws JSONException {
         SharedPreferences sharedPreferences = this.getSharedPreferences("DateDetails", Context.MODE_PRIVATE);
         String date = sharedPreferences.getString("date","none");
-
         Toast.makeText(this, date, Toast.LENGTH_LONG).show();
-        BoozeFiles file = new BoozeFiles(date, "FoodList", DrinkOutput.this);
-        file.deleteFile(file);
+        final BoozeFiles file = new BoozeFiles(date, "FoodList", DrinkOutput.this);
+        //file.deleteFile(file);
         file.writeDrink(file, details.getString("item_name"),details.getString("nf_calories"),drinkMap.toString());
+        //  file.writeFile(file, file.readFile(file));
         String stringTest = file.readFile(file);
         Log.d("OUTPUT", stringTest);
-//        final TextView profileName = (TextView)findViewById(R.id.my_drinks);
-//        profileName.setText(file.readNutrients(file));
-      //  Toast.makeText(DrinkOutput.this, stringTest, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(DrinkOutput.this, DiaryMain.class);
-        startActivity(intent);
+
+        listView2 = (ListView) findViewById(R.id.drink_listview);
+        adapter2 = new Adapter(this,nutritionList);
+        listView2.setAdapter(adapter2);
+        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                BoozeFiles selectedFromList = (BoozeFiles) listView2.getItemAtPosition(position);
+                Log.i("POSITION", selectedFromList.toString());
+                Intent intent = new Intent(DrinkOutput.this, DiaryMain.class);
+               // String drink = file.readDrink(file);
+                intent.putExtra("drink", selectedFromList.readDrink(file));
+                intent.putExtra("calories", selectedFromList.readCalories(file));
+                intent.putExtra("nutrients", selectedFromList.readNutrients(file));
+                //listView2.setAdapter(adapter2);
+                startActivity(intent);
+
+            }
+        });
+
+        final TextView profileName = (TextView)findViewById(R.id.drink);
+        profileName.setText(file.readFile(file));
+        Toast.makeText(DrinkOutput.this, stringTest, Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(DrinkOutput.this, DiaryMain.class);
+//        startActivity(intent);
     }
 
 }

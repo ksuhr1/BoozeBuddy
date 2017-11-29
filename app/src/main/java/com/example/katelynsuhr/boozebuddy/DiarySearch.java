@@ -110,9 +110,6 @@ public class DiarySearch extends AppCompatActivity {
             }
         });
         requestQueue.add(jsnRequest);
-
-
-
     }
 
 
