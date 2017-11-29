@@ -4,46 +4,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.katelynsuhr.boozebuddy.contactsearch"
-    tools:showIn="@layout/activity_contactsearch">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <ListView
-        android:id="@+id/contactlist"
-        android:layout_width="375dp"
-        android:layout_height="632dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteY="35dp" />
 
-    <EditText
-        android:id="@+id/entercontact"
-        android:layout_width="294dp"
-        android:layout_height="54dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintLeft_toLeftOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="551dp"
+        android:orientation="horizontal">
 
-    <ImageButton
-        android:id="@+id/blockcontact"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/block"
-        android:layout_marginRight="3dp"
-        android:onClick="blockcontact"
-        app:layout_constraintRight_toRightOf="parent" />
+        <EditText
+            android:id="@+id/entercontact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
 
-    <ImageButton
-        android:id="@+id/addcontact"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/add"
-        android:layout_marginRight="50dp"
-        android:onClick="addcontact"
-        app:layout_constraintRight_toRightOf="parent" />
+        <ImageButton
+            android:id="@+id/blockcontact"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_weight="1"
+            android:onClick="blockcontact"
+            android:scaleType="fitXY"
+            android:src="@drawable/block"
+            app:layout_constraintRight_toRightOf="parent" />
 
+        <ImageButton
+            android:id="@+id/addcontact"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_weight="1"
+            android:onClick="addcontact"
+            android:scaleType="fitXY"
+            android:src="@drawable/add"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <ImageButton
+            android:id="@+id/deletecontact"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_weight="1"
+            android:onClick="deletecontact"
+            android:scaleType="fitXY"
+            android:src="@drawable/trash"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp">
+
+        <EditText
+            android:id="@+id/editText4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
+
+        <EditText
+            android:id="@+id/editText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

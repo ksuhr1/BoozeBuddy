@@ -26,7 +26,7 @@ public class EditInfo extends AppCompatActivity {
         name.setText(tracker.getString("name", "name"));
         weight.setText(tracker.getString("weight", "weight"));
         height.setText(tracker.getString("height", "height"));
-        age.setText(tracker.getString("age", "age"));
+        age.setText(Integer.toString(tracker.getInt("age", 0)));
         sex.setText(tracker.getString("sex", "sex"));
 
 

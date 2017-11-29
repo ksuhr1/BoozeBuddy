@@ -38,7 +38,7 @@ public class BoozeFiles {
     void writeFile(BoozeFiles file, String data) {
         try {
             FileOutputStream writer = new FileOutputStream(file.file, true);
-            writer.write(data.getBytes());
+            writer.write((data + "/").getBytes());
             writer.close();
         } catch(IOException ie) {
             ie.printStackTrace();
