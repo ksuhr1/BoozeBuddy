@@ -52,10 +52,14 @@
         <activity
             android:name=".DrinkOutput"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".UserInfo"/>
-        <activity android:name=".BACCalculator"/>
-        <activity android:name=".EditInfo"/>
-        <activity android:name=".Scanner"/>
+        <activity android:name=".UserInfo" />
+        <activity android:name=".BACCalculator" />
+        <activity android:name=".EditInfo" />
+        <activity android:name=".Scanner" />
+        <activity
+            android:name=".DrunkDial"
+            android:label="@string/title_activity_drunk_dial"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

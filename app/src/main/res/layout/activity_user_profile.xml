@@ -32,7 +32,7 @@
         app:layout_constraintVertical_bias="0.053" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/safetyspinner"
         android:layout_width="266dp"
         android:layout_height="24dp"
         android:layout_marginBottom="290dp"
@@ -41,11 +41,13 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinner2"
+    <Button
+        android:id="@+id/blockedaccess"
         android:layout_width="264dp"
-        android:layout_height="26dp"
+        android:layout_height="46dp"
+        android:text="@string/view_blocked"
         android:layout_marginBottom="240dp"
+        android:onClick="blockcontact"
         app:layout_constraintHorizontal_bias=".9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -111,20 +113,6 @@
         android:onClick="spendingcalculator"
         app:layout_constraintVertical_bias=".8"
         app:layout_constraintHorizontal_bias=".5"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        />
-
-    <Button
-        android:id="@+id/fileTest"
-        android:layout_width="118dp"
-        android:layout_height="46dp"
-        android:text="Test"
-        android:onClick="filetest"
-        app:layout_constraintVertical_bias=".8"
-        app:layout_constraintHorizontal_bias=".05"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

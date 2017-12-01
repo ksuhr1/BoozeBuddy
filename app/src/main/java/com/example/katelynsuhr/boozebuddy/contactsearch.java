@@ -6,6 +6,8 @@ package com.example.katelynsuhr.boozebuddy;
         import android.app.Activity;
         import android.content.ContentValues;
         import android.content.Context;
+        import android.content.DialogInterface;
+        import android.content.Intent;
         import android.content.SharedPreferences;
         import android.content.pm.PackageManager;
         import android.database.Cursor;
@@ -15,12 +17,18 @@ package com.example.katelynsuhr.boozebuddy;
         import android.provider.BaseColumns;
         import android.provider.BlockedNumberContract;
         import android.provider.ContactsContract;
+        import android.support.design.widget.Snackbar;
         import android.support.v4.app.ActivityCompat;
         import android.support.v4.content.ContextCompat;
+        import android.support.v7.app.AlertDialog;
+        import android.text.TextUtils;
+        import android.view.Gravity;
         import android.view.View;
         import android.widget.EditText;
         import android.widget.ListView;
         import android.telecom.TelecomManager;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
 public class contactsearch extends Activity {
     private ListView mListView;
@@ -58,21 +66,48 @@ public class contactsearch extends Activity {
     }
 
     public void blockcontact (View view){
-        BoozeFiles blocked = new BoozeFiles("blocked", "numbers", contactsearch.this);
         EditText entercontact = (EditText)findViewById(R.id.entercontact);
         String name = entercontact.getText().toString();
-        blocked.writeFile(blocked, name);
-        entercontact.setText(blocked.readFile(blocked));
+        Toast toast = Toast.makeText(contactsearch.this, getPhoneNumber(name, contactsearch.this), Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.TOP, 10 , 10);
+        toast.show();
+        blockNumber();
     }
 
     public void addcontact (View view){
-        BoozeFiles safety = new BoozeFiles("safety", "numbers", contactsearch.this);
+        SharedPreferences safetylist = getSharedPreferences("safetylist", Context.MODE_PRIVATE);
+        SharedPreferences.Editor safetyedit = safetylist.edit();
+        SharedPreferences safetynumbers = getSharedPreferences("safetynumbers", Context.MODE_PRIVATE);
+        SharedPreferences.Editor safetynumedit = safetynumbers.edit();
         EditText entercontact = (EditText)findViewById(R.id.entercontact);
         String name = entercontact.getText().toString();
-        safety.writeFile(safety, name);
-        entercontact.setText(safety.readFile(safety));
+        String number = getPhoneNumber(name, this);
+        if(number == "Unsaved"){
+            Toast.makeText(this, "That is not a valid contact", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        safetynumedit.putString("safetynumbers", safetynumbers.getString("safetynumbers", "") + number + "/");
+        safetynumedit.commit();
+        safetyedit.putString("safetylist", safetylist.getString("safetylist", "") + name + "/");
+        safetyedit.commit();
+        entercontact.setText(safetylist.getString("safetylist", ""));
     }
 
+    public void deletecontact (View view){
+        SharedPreferences safetylist = getSharedPreferences("safetylist", Context.MODE_PRIVATE);
+        SharedPreferences.Editor safetyedit = safetylist.edit();
+        EditText entercontact = (EditText)findViewById(R.id.entercontact);
+        ArrayList<String> names = toArray("safetylist");
+        names.remove(names.indexOf(entercontact.getText().toString() + "/"));
+        String joined = "";
+        for(int i = 0; i < names.size(); i++){
+            joined += names.get(i);
+        }
+        Toast.makeText(this, joined, Toast.LENGTH_SHORT).show();
+        safetyedit.putString("safetylist", joined);
+        safetyedit.commit();
+        entercontact.setText(safetylist.getString("safetylist", ""));
+    }
     public String getPhoneNumber(String name, Context context) {
         String ret = null;
         String selection = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME+" like'%" + name +"%'";
@@ -88,18 +123,26 @@ public class contactsearch extends Activity {
         return ret;
     }
 
-    public void blockNumber(String number) {
+    public void blockNumber() {
         TelecomManager telecomManager = (TelecomManager) getSystemService(Context.TELECOM_SERVICE);
         contactsearch.this.startActivity(telecomManager.createManageBlockedNumbersIntent(), null);
-        Cursor c = getContentResolver().query(BlockedNumberContract.BlockedNumbers.CONTENT_URI,
-                new String[]{BlockedNumberContract.BlockedNumbers.COLUMN_ID,
-                        BlockedNumberContract.BlockedNumbers.COLUMN_ORIGINAL_NUMBER,
-                        BlockedNumberContract.BlockedNumbers.COLUMN_E164_NUMBER}, null, null, null);
-
-        ContentValues values = new ContentValues();
-        values.put(BlockedNumberContract.BlockedNumbers.COLUMN_ORIGINAL_NUMBER, number);
-        Uri uri = getContentResolver().insert(BlockedNumberContract.BlockedNumbers.CONTENT_URI, values);
-
     }
+
+    public ArrayList<String> toArray (String category) {
+        SharedPreferences toarray = getSharedPreferences(category, Context.MODE_PRIVATE);
+        String names = toarray.getString(category, "");
+        String name = "";
+        ArrayList<String> newarray = new ArrayList<String>();
+        for(int i = 0; i < names.length(); i++){
+            if(names.charAt(i)== '/'){
+                newarray.add(name + "/");
+                name = "";
+            } else {
+                name = name + Character.toString(names.charAt(i));
+            }
+        }
+        return newarray;
+    }
+
 
 }

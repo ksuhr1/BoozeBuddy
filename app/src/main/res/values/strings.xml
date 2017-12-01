@@ -24,4 +24,6 @@
     <string name="textview">TextView</string>
     <string name="title_activity_baccalculator">BACCalculator</string>
     <string name="title_activity_spendingcalculator">spendingcalculator</string>
+    <string name="view_blocked">view blocked</string>
+    <string name="title_activity_drunk_dial">DrunkDial</string>
 </resources>

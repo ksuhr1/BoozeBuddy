@@ -1,5 +1,6 @@
 package com.example.katelynsuhr.boozebuddy;
 
+import android.app.Application;
 import android.content.Context;
 
 import org.json.JSONObject;
@@ -8,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.nio.charset.CharacterCodingException;
 
@@ -15,14 +17,16 @@ import java.nio.charset.CharacterCodingException;
  * Created by kennedybagnol on 11/27/17.
  */
 
-public class BoozeFiles {
-        private File file;
+public class BoozeFiles extends Application{
+        public File file;
         private File path;
         private String category;
+        private String name;
         private int date;
 
 
         BoozeFiles(String name, String category, Context context) {
+            this.name = name;
             this.category = category;
             this.path = context.getFilesDir();
             this.file = new File(path, name);
@@ -45,6 +49,7 @@ public class BoozeFiles {
         }
 
     }
+
 
     void writeDrink(BoozeFiles file, String drink, String calories, String nutrients) {
         try {

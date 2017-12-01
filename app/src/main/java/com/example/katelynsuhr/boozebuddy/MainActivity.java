@@ -30,5 +30,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void drunkdial (View view){
+        Intent intent = new Intent(MainActivity.this, DrunkDial.class);
+        startActivity(intent);
+    }
+
 
 }
