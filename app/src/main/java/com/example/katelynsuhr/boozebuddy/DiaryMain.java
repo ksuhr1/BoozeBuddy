@@ -27,7 +27,9 @@ public class DiaryMain extends AppCompatActivity {
     private ListView listView2;
     public CalendarAdapter adapter2;
     private String date;
-    private Calendar calendar = Calendar.getInstance();
+    String currentDate;
+    Long dateChange;
+   // private Calendar calendar = Calendar.getInstance();
 
     private static final String TAG = "CalendarActivity";
     private CalendarView mCalendarView;
@@ -36,11 +38,7 @@ public class DiaryMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diarymain);
         mCalendarView = (CalendarView)findViewById(R.id.calendarView);
-       //
-       // calendar.setTime(new Date());
-
-       // calendar.set(Calendar.DAY_OF_MONTH);
-
+        //dateChange = mCalendarView.getDate();
 
         mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -51,49 +49,13 @@ public class DiaryMain extends AppCompatActivity {
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_VERTICAL, 0, 0); //changes position Toast appears
                 toast.show();
                 date= "" + month + "_" + dayOfMonth + "_" + year;
-               // mCalendarView.setDate(Long.parseLong(date));
-              //  Date datePressed = calendar.getTime();
-              //  calendar.setDate(Long.parseLong(date));
-
                 SharedPreferences sharedPreferences = getSharedPreferences("DateDetails", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("date",date);
                 editor.apply();
                 Toast toaster = Toast.makeText(getBaseContext(),"Date was saved successfully: "+sharedPreferences.contains("date"),Toast.LENGTH_LONG);
                 toaster.show();
-               // calendar = (Calendar) savedInstanceState.getSerializable("date");
-//                if(BoozeUtil.isExist(DiaryMain.this,date)){
-//                    Toast.makeText(DiaryMain.this,"TRUE"+ date, Toast.LENGTH_LONG).show();
-//                }
-
-                String stringTest = BoozeUtil.readFile(DiaryMain.this, date);
-                List<String> items = Arrays.asList(stringTest.split("/"));
-                List<Nutrition> nutritions = new ArrayList<>();
-
-                Nutrition nutrition = null;
-                for (int i = 0; i < items.size(); i++) {
-                    int remainder = i % 3;
-
-                    if (remainder == 0) {
-                        nutrition = new Nutrition();
-                        String m = items.get(i);
-                        nutrition.setItemName(m);
-                    } else if (remainder == 1) {
-                        String n = items.get(i);
-                        assert nutrition != null;
-                        nutrition.setCalories(n);
-                    } else if(remainder == 2) {
-                        String p = items.get(i);
-                        assert nutrition != null;
-                        nutrition.setBrandName(p);
-                        nutritions.add(nutrition);
-                    }
-                }
-                listView2 = (ListView) findViewById(R.id.drink_listview);
-                adapter2 = new CalendarAdapter(DiaryMain.this, nutritions);
-                listView2.setAdapter(adapter2);
-                adapter2.notifyDataSetChanged();
-
+                updateListView(date);
 
             }
         });
@@ -102,50 +64,48 @@ public class DiaryMain extends AppCompatActivity {
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
-        String currentDate = "" + month + "_"+ dayOfMonth+"_"+year;
+        currentDate = "" + month + "_"+ dayOfMonth+"_"+year;
         Toast.makeText(this,currentDate, Toast.LENGTH_LONG).show();
         String currentFile = BoozeUtil.readFile(this, currentDate);
+//        if(BoozeUtil.isExist(this,currentDate)){
+//            Toast.makeText(this,"TRUE"+ currentFile, Toast.LENGTH_LONG).show();
+//        }
         //Checks if there is a file already created for the current date, if there is one,
         //if populates the list view with the drinks from that day
-        if(BoozeUtil.isExist(this,currentDate)){
-            Toast.makeText(this,"TRUE"+ currentFile, Toast.LENGTH_LONG).show();
+        if(BoozeUtil.isExist(this, currentDate)) {
+            updateListView(currentDate);
         }
+    }
 
-        if(BoozeUtil.isExist(this, currentDate)){
-            String stringTest = BoozeUtil.readFile(this, currentDate);
-            List<String> items = Arrays.asList(stringTest.split("/"));
-            List<Nutrition> nutritions = new ArrayList<>();
+    /* List View helper function */
+    public void updateListView(String selectedDate){
+        String stringTest = BoozeUtil.readFile(DiaryMain.this, selectedDate);
+        List<String> items = Arrays.asList(stringTest.split("/"));
+        List<Nutrition> nutritions = new ArrayList<>();
 
-            Nutrition nutrition = null;
-            for (int i = 0; i < items.size(); i++) {
-                int remainder = i % 3;
+        Nutrition nutrition = null;
+        for (int i = 0; i < items.size(); i++) {
+            int remainder = i % 3;
 
-                if (remainder == 0) {
-                    nutrition = new Nutrition();
-                    String m = items.get(i);
-                    nutrition.setItemName(m);
-                } else if (remainder == 1) {
-                    String n = items.get(i);
-                    assert nutrition != null;
-                    nutrition.setCalories(n);
-                } else if(remainder == 2) {
-                    String p = items.get(i);
-                    assert nutrition != null;
-                    nutrition.setBrandName(p);
-                    nutritions.add(nutrition);
-                } else {
-                    return;
-                }
+            if (remainder == 0) {
+                nutrition = new Nutrition();
+                String m = items.get(i);
+                nutrition.setItemName(m);
+            } else if (remainder == 1) {
+                String n = items.get(i);
+                assert nutrition != null;
+                nutrition.setCalories(n);
+            } else if(remainder == 2) {
+                String p = items.get(i);
+                assert nutrition != null;
+                nutrition.setBrandName(p);
+                nutritions.add(nutrition);
             }
-            listView2 = (ListView) findViewById(R.id.drink_listview);
-            adapter2 = new CalendarAdapter(this, nutritions);
-            listView2.setAdapter(adapter2);
-            adapter2.notifyDataSetChanged();
-
-        } else {
-            return;
         }
-      
+        listView2 = (ListView) findViewById(R.id.drink_listview);
+        adapter2 = new CalendarAdapter(DiaryMain.this, nutritions);
+        listView2.setAdapter(adapter2);
+        adapter2.notifyDataSetChanged();
     }
 
     @Override

@@ -20,6 +20,7 @@
         android:drawablePadding="2dip"
         android:drawableStart="@mipmap/borderhouse"
         android:weekNumberColor="#000"
+        android:state_selected="true"
         />
 
     <LinearLayout
