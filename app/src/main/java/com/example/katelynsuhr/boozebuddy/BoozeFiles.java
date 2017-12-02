@@ -15,7 +15,7 @@ import java.nio.charset.CharacterCodingException;
  * Created by kennedybagnol on 11/27/17.
  */
 
-public class BoozeFiles {
+class BoozeFiles {
         private File file;
         private File path;
         private String category;
@@ -28,13 +28,6 @@ public class BoozeFiles {
             this.file = new File(path, name);
         }
 
-        BoozeFiles(String name, int date, String category, Context context){
-            this.category = category;
-            this.path = context.getFilesDir();
-            this.file = new File(path, name);
-            this.date = date;
-        }
-
     void writeFile(BoozeFiles file, String data) {
         try {
             FileOutputStream writer = new FileOutputStream(file.file, true);
@@ -45,13 +38,15 @@ public class BoozeFiles {
         }
 
     }
+    //void writeDrink(String drink, String calories, String brand, String nutrients)
 
-    void writeDrink(BoozeFiles file, String drink, String calories, String nutrients) {
+    void writeDrink(String drink, String calories, String brand) {
         try {
-            FileOutputStream writer = new FileOutputStream(file.file, true);
+            FileOutputStream writer = new FileOutputStream(file, true);
             writer.write((drink + "/").getBytes());
             writer.write((calories + "/").getBytes());
-            writer.write((nutrients + "/").getBytes());
+            writer.write((brand + "/").getBytes());
+          //  writer.write((nutrients + "/").getBytes());
             writer.close();
         } catch (IOException ie) {
             ie.printStackTrace();
@@ -138,16 +133,42 @@ public class BoozeFiles {
         }
         return nutrients;
     }
+    String readBrand(BoozeFiles file){
+        int length = (int) file.file.length();
+        byte[] bytes = new byte[length];
+        try {
+            FileInputStream in = new FileInputStream(file.file);
+            in.read(bytes);
+            in.close();
+        } catch (IOException ie) {
+            ie.printStackTrace();
+        }
+        String contents = new String(bytes);
+        String brand = "";
+        String someString = "/";
+        char slash = someString.charAt(0);
+        int track = 0;
+        for (int i = 0; i < contents.length(); i++){
+            char c = contents.charAt(i);
+            if(c == slash){
+                track++;
+            }
+            if(track%3 == 2){
+                brand = brand + Character.toString(c);
+            }
+        }
+        return brand;
+    }
 
     void deleteFile(BoozeFiles file){
         file.file.delete();
     }
 
-    String readFile(BoozeFiles file) {
-        int length = (int) file.file.length();
+    String readFile() {
+        int length = (int) file.length();
         byte[] bytes = new byte[length];
         try {
-            FileInputStream in = new FileInputStream(file.file);
+            FileInputStream in = new FileInputStream(file);
             in.read(bytes);
             in.close();
         } catch (IOException ie) {

@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
 import javax.crypto.Mac;
 
 public class DrinkOutput extends AppCompatActivity {
-    private static List<String> charList = new ArrayList<String>();
+    private static ArrayList<String> charList = new ArrayList<>();
     private ListView listView;
     public MacroNutrientAdapter adapter;
     TextView drinkName;
@@ -47,7 +47,7 @@ public class DrinkOutput extends AppCompatActivity {
     JSONObject details;
     private ListView listView2;
     public CalendarAdapter adapter2;
-    public static List<BoozeFiles> nutritionList = new ArrayList<>();
+   // public static List<Nutrition> nutritionList = new ArrayList<>();
     //SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class DrinkOutput extends AppCompatActivity {
         Intent i = getIntent();
         Bundle b = i.getExtras();
 
-        String item = (String) b.getString("item_id");
+        String item = b.getString("item_id");
         sendItemRequest(item);
 
         drinkName = (TextView)findViewById(R.id.drink);
@@ -81,14 +81,14 @@ public class DrinkOutput extends AppCompatActivity {
         final String rightUrl = "?id=" + itemId + "&appId=82c97058&appKey=979eb4ea51a7fd11e7b5df0cae3dfd73";
         final String finalUrl = leftUrl + rightUrl;
         //Request a string response form the provided URL
-        JsonObjectRequest jsnRequest = new JsonObjectRequest(Request.Method.GET, finalUrl, (JSONObject) null,
+        JsonObjectRequest jsnRequest = new JsonObjectRequest(Request.Method.GET, finalUrl,/*(JSON OBJECT)*/ null ,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.i("VOLLEY", response.toString());
                         try {
                             details = response;
-                            drinkMap = new TreeMap<String, String>();
+                            drinkMap = new TreeMap<>();
                             drinkMap.put(replaceChar("nf_protein"), details.getString("nf_protein"));
                             drinkMap.put(replaceChar("nf_total_carbohydrate"), details.getString("nf_total_carbohydrate"));
                             drinkMap.put(replaceChar("nf_sugars"), details.getString("nf_sugars"));
@@ -141,36 +141,13 @@ public class DrinkOutput extends AppCompatActivity {
         SharedPreferences sharedPreferences = this.getSharedPreferences("DateDetails", Context.MODE_PRIVATE);
         String date = sharedPreferences.getString("date","none");
         Toast.makeText(this, date, Toast.LENGTH_LONG).show();
+
         final BoozeFiles file = new BoozeFiles(date, "FoodList", DrinkOutput.this);
         //file.deleteFile(file);
-        file.writeDrink(file, details.getString("item_name"),details.getString("nf_calories"),drinkMap.toString());
-        //  file.writeFile(file, file.readFile(file));
-        String stringTest = file.readFile(file);
-        Log.d("OUTPUT", stringTest);
-
-        listView2 = (ListView) findViewById(R.id.drink_listview);
-        adapter2 = new CalendarAdapter(this, nutritionList);
-        listView2.setAdapter(adapter2);
-        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                BoozeFiles selectedFromList = (BoozeFiles) listView2.getItemAtPosition(position);
-                Log.i("POSITION", selectedFromList.toString());
-                Intent intent = new Intent(DrinkOutput.this, DiaryMain.class);
-               // String drink = file.readDrink(file);
-                intent.putExtra("drink", selectedFromList.readDrink(file));
-                intent.putExtra("calories", selectedFromList.readCalories(file));
-                intent.putExtra("nutrients", selectedFromList.readNutrients(file));
-                startActivity(intent);
-
-            }
-        });
-
-        final TextView profileName = (TextView)findViewById(R.id.drink);
-        profileName.setText(file.readFile(file));
-        Toast.makeText(DrinkOutput.this, stringTest, Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(DrinkOutput.this, DiaryMain.class);
-//        startActivity(intent);
+        file.writeDrink(details.getString("item_name"),details.getString("nf_calories"), details.getString("brand_name"));
+       // file.writeDrink(details.getString("item_name"),details.getString("nf_calories"), details.getString("brand_name"),drinkMap.toString());
+        Intent intent = new Intent(DrinkOutput.this, DiaryMain.class);
+        startActivity(intent);
+        }
     }
 
-}

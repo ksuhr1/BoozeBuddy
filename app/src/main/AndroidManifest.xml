@@ -20,42 +20,54 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+        <activity android:name=".SplashScreen"/>
         <activity
             android:name=".DiaryMain"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".DiarySearch" />
+        <activity android:name=".DiarySearch"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".UserProfile"
             android:label="@string/title_activity_user_profile"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".safety"
             android:label="@string/title_activity_safety"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".contactsearch"
             android:label="@string/title_activity_contact_view"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".partymode"
             android:label="partymode"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".spendingcalculator"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".DrinkOutput"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".UserInfo"/>
-        <activity android:name=".BACCalculator"/>
-        <activity android:name=".EditInfo"/>
-        <activity android:name=".Scanner"/>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UserInfo"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".BACCalculator"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".EditInfo"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Scanner"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

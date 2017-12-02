@@ -46,17 +46,17 @@ public class UserProfile extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void filetest(View view){
-        BoozeFiles file = new BoozeFiles("test", "testcategory", UserProfile.this);
-        file.deleteFile(file);
-        file.writeDrink(file, "Beer", "300", "glucose, lactose");
-        file.writeDrink(file, "Vodka", "300", "glucose, lactose");
-        file.writeDrink(file, "Wine", "300", "glucose, lactose");
-        String stringtest = file.readFile(file);
-        final TextView profilename = (TextView)findViewById(R.id.profileName);
-        profilename.setText(file.readNutrients(file));
-        Toast.makeText(UserProfile.this, stringtest, Toast.LENGTH_SHORT).show();
-    }
+//    public void filetest(View view){
+//        BoozeFiles file = new BoozeFiles("test", "testcategory", UserProfile.this);
+//        file.deleteFile(file);
+//        file.writeDrink(file, "Beer", "300", "glucose, lactose");
+//        file.writeDrink(file, "Vodka", "300", "glucose, lactose");
+//        file.writeDrink(file, "Wine", "300", "glucose, lactose");
+//        String stringtest = file.readFile(file);
+//        final TextView profilename = (TextView)findViewById(R.id.profileName);
+//        profilename.setText(file.readNutrients(file));
+//        Toast.makeText(UserProfile.this, stringtest, Toast.LENGTH_SHORT).show();
+//    }
 
 }
 
