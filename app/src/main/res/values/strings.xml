@@ -24,4 +24,12 @@
     <string name="textview">TextView</string>
     <string name="title_activity_baccalculator">BACCalculator</string>
     <string name="title_activity_spendingcalculator">spendingcalculator</string>
+    <string name="add_drink">Add Drink</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="drink_name">Drink Name</string>
+    <string name="brand_name">Brand Name</string>
+    <string name="cal">Cal</string>
+    <string name="serving_size">Serving Size:</string>
+    <string name="number_of_servings">Number of servings:</string>
+    <string name="calories">Calories</string>
 </resources>

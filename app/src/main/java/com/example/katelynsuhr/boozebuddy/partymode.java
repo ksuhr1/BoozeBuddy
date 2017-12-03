@@ -2,13 +2,17 @@
 package com.example.katelynsuhr.boozebuddy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.text.DecimalFormat;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +32,7 @@ public class partymode extends AppCompatActivity {
         final SharedPreferences.Editor soloeditor = solotracker.edit();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partymode);
+        getSupportActionBar().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(),R.drawable.background_color, null));
         shoteditor.putInt("shotnumber", 0);
         wineeditor.putInt("winenumber", 0);
         beereditor.putInt("beernumber", 0);
@@ -36,6 +41,21 @@ public class partymode extends AppCompatActivity {
         wineeditor.commit();
         beereditor.commit();
         soloeditor.commit();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu) {
+        switch (menu.getItemId()) {
+            case R.id.action_mainmenu:
+                Intent intent = new Intent(partymode.this, MainActivity.class);
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(menu);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_hamburger, menu);
+        return true;
     }
 
     public void shotbutton(View view) {
@@ -90,7 +110,7 @@ public class partymode extends AppCompatActivity {
         int drinknumber = 0;
         drinknumber = drinknumber + shottracker.getInt("shotnumber", 0) + winetracker.getInt("winenumber", 0)
                 + beertracker.getInt("beernumber", 0) + solotracker.getInt("solonumber", 0);
-        weightDouble = Double.parseDouble(tracker.getString("weight", null).toString());
+        weightDouble = Double.parseDouble(tracker.getString("weight", null));
         drinkDouble = drinknumber;
         timeDouble = 1;
 

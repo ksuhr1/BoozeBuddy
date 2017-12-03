@@ -3,10 +3,15 @@ package com.example.katelynsuhr.boozebuddy;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -47,33 +52,43 @@ public class DrinkOutput extends AppCompatActivity {
     JSONObject details;
     private ListView listView2;
     public CalendarAdapter adapter2;
-   // public static List<Nutrition> nutritionList = new ArrayList<>();
+    String item;
+
+    // public static List<Nutrition> nutritionList = new ArrayList<>();
     //SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.macronutrient_list);
         TextView input = (TextView) findViewById(R.id.textView1);
+        getSupportActionBar().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(),R.drawable.background_color, null));
         Intent i = getIntent();
         Bundle b = i.getExtras();
 
-        String item = b.getString("item_id");
+
+
+        item = b.getString("item_id");
         sendItemRequest(item);
 
-        drinkName = (TextView)findViewById(R.id.drink);
-        brandName = (TextView)findViewById(R.id.brandName);
-        TextView numServings = (TextView)findViewById(R.id.numServings);
+        drinkName = (TextView) findViewById(R.id.drink);
+        brandName = (TextView) findViewById(R.id.brandName);
+        TextView numServings = (TextView) findViewById(R.id.numServings);
         cal = (TextView) findViewById((R.id.calories));
         drinkName.setText(getIntent().getStringExtra("item_name"));
         cal.setText(getIntent().getStringExtra("nf_calories"));
-        cal.append("\n"+"calories");
+        cal.append("\n" + "calories");
 
         brandName.setText(getIntent().getStringExtra("brand_name"));
-        //numServings.setText(getIntent().getStringExtra("nf_serving_size_qty"));
-
-
+        // numServings.setText(getIntent().getStringExtra("nf_serving_size_qty"));
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_drinkoutput, menu);
+        return true;
+    }
+
 
     public void sendItemRequest(String itemId) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -81,7 +96,7 @@ public class DrinkOutput extends AppCompatActivity {
         final String rightUrl = "?id=" + itemId + "&appId=82c97058&appKey=979eb4ea51a7fd11e7b5df0cae3dfd73";
         final String finalUrl = leftUrl + rightUrl;
         //Request a string response form the provided URL
-        JsonObjectRequest jsnRequest = new JsonObjectRequest(Request.Method.GET, finalUrl,/*(JSON OBJECT)*/ null ,
+        JsonObjectRequest jsnRequest = new JsonObjectRequest(Request.Method.GET, finalUrl,/*(JSON OBJECT)*/ null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -100,13 +115,16 @@ public class DrinkOutput extends AppCompatActivity {
                             drinkMap.put(replaceChar("nf_cholesterol"), details.getString("nf_cholesterol"));
                             drinkMap.put(replaceChar("nf_sodium"), details.getString("nf_sodium"));
                             drinkMap.put(replaceChar("nf_dietary_fiber"), details.getString("nf_dietary_fiber"));
-                            drinkMap.put(replaceChar("nf_serving_size_qty"), details.getString("nf_serving_size_qty"));
+                            //drinkMap.put(replaceChar("nf_serving_size_qty"), details.getString("nf_serving_size_qty"));
                             drinkMap.put(replaceChar("nf_serving_weight_grams"), details.getString("nf_serving_weight_grams"));
                             drinkMap.put(replaceChar("nf_sugars"), details.getString("nf_sugars"));
 
                             listView = (ListView) findViewById(R.id.macroNutrientResults);
                             adapter = new MacroNutrientAdapter(DrinkOutput.this, drinkMap);
                             listView.setAdapter(adapter);
+                            TextView numServings = (TextView) findViewById(R.id.numServings);
+//                            numServings.setText(details.getString("nf)serving_size_qty"));
+                            //  numServings.append( drinkMap.put(replaceChar("nf_serving_size_qty"), details.getString("nf_serving_size_qty")));
 
                             Log.i("VALUES", drinkMap.toString());
                         } catch (JSONException e) {
@@ -137,17 +155,33 @@ public class DrinkOutput extends AppCompatActivity {
 
     }
 
-    public void addFood (View view) throws JSONException {
-        SharedPreferences sharedPreferences = this.getSharedPreferences("DateDetails", Context.MODE_PRIVATE);
-        String date = sharedPreferences.getString("date","none");
-        Toast.makeText(this, date, Toast.LENGTH_LONG).show();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu) {
+        switch (menu.getItemId()) {
+            case R.id.action_add_drink:
+                SharedPreferences sharedPreferences = this.getSharedPreferences("DateDetails", Context.MODE_PRIVATE);
+                String date = sharedPreferences.getString("date", "none");
+                Toast.makeText(this, date, Toast.LENGTH_LONG).show();
 
-        final BoozeFiles file = new BoozeFiles(date, "FoodList", DrinkOutput.this);
-        //file.deleteFile(file);
-        file.writeDrink(details.getString("item_name"),details.getString("nf_calories"), details.getString("brand_name"));
-       // file.writeDrink(details.getString("item_name"),details.getString("nf_calories"), details.getString("brand_name"),drinkMap.toString());
-        Intent intent = new Intent(DrinkOutput.this, DiaryMain.class);
-        startActivity(intent);
+                final BoozeFiles file = new BoozeFiles(date, "FoodList", DrinkOutput.this);
+                //file.deleteFile(file);
+                try {
+                    file.writeDrink(item, details.getString("item_name"), details.getString("nf_calories"), details.getString("brand_name"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Log.i("OUTPUT", file.readFile());
+                Intent intent = new Intent(DrinkOutput.this, DiaryMain.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_menu:
+                Intent intent1 = new Intent(DrinkOutput.this, MainActivity.class);
+                startActivity(intent1);
+                return true;
         }
+
+        return super.onOptionsItemSelected(menu);
     }
+}
+
 

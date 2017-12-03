@@ -8,6 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <!-- style for the action bar backgrounds -->
+    <!--<style name="AppTheme.MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">-->
+        <!--<item name="android:background">@drawable/background_color</item>-->
+    <!--</style>-->
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
