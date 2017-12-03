@@ -2,9 +2,12 @@ package com.example.katelynsuhr.boozebuddy;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -34,6 +37,7 @@ public class DiarySearch extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_search);
+        getSupportActionBar().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(),R.drawable.background_color, null));
 
         listView = (ListView) findViewById(R.id.jsonResults);
         adapter = new Adapter(this, nutritionList);
@@ -43,6 +47,21 @@ public class DiarySearch extends AppCompatActivity {
     public void scanRequest(View view) {
         Intent intent = new Intent(DiarySearch.this, Scanner.class);
         startActivity(intent);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu) {
+        switch (menu.getItemId()) {
+            case R.id.action_mainmenu:
+                Intent intent = new Intent(DiarySearch.this, MainActivity.class);
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(menu);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_hamburger, menu);
+        return true;
     }
 
 
@@ -79,7 +98,7 @@ public class DiarySearch extends AppCompatActivity {
         });
 
         //Request a string response form the provided URL
-        JsonObjectRequest jsnRequest = new JsonObjectRequest(Request.Method.GET, finalUrl, (JSONObject) null,
+        JsonObjectRequest jsnRequest = new JsonObjectRequest(Request.Method.GET, finalUrl, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

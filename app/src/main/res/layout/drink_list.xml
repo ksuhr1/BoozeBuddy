@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
         android:paddingStart="10dp"
-        android:text="TextView"
         android:textColor="#000"
         android:textSize="18sp" />
 
@@ -26,18 +25,18 @@
             android:layout_weight="2.0"
             android:paddingLeft="10dp"
             android:paddingStart="10dp"
-            android:text="Left Aligned"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/calories"
-            android:layout_width="10dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="0.81"
+            android:gravity="end"
             android:paddingRight="30dp"
-            android:gravity="left"
+            android:paddingEnd="30dp"
+            android:text="@string/calories"
             android:textAlignment="gravity"
-            android:text="hi"
             android:textColor="#000"
             android:textSize="18sp"
             android:textStyle="bold" />

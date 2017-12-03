@@ -57,10 +57,9 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
     }
 
-    public void onRequestPermssionsResult(int requestCode, String permission[], int grantResults[])
+    public void onRequestPermissionsResult(int requestCode, String permission[], int grantResults[])
     {
-        switch(requestCode)
-        {
+        switch(requestCode) {
             case REQUEST_CAMERA :
                 if(grantResults.length > 0)
                 {
@@ -94,7 +93,7 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
                 break;
         }
     }
-//}
+
 
     @Override
     public void onResume() {
@@ -110,6 +109,7 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
                     setContentView(scannerView);
                 }
                 scannerView.setResultHandler(this);
+                System.out.println("fsdkfhjbsdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                 scannerView.startCamera();
             }
             else

@@ -17,14 +17,13 @@ import java.util.List;
 public class CalendarAdapter extends BaseAdapter{
     private LayoutInflater inflater;
     private Activity activity;
-    private List<BoozeFiles> drinks;
+    private List<Nutrition> drinks;
+
     private TextView itemName ;
     private TextView  brandName;
     private TextView calories ;
 
-
-
-    public CalendarAdapter(Activity activity, List<BoozeFiles> items){
+    public CalendarAdapter(Activity activity, List<Nutrition> items){
         this.activity = activity;
         this.drinks = items;
     }
@@ -55,15 +54,15 @@ public class CalendarAdapter extends BaseAdapter{
 
         }
 
-        itemName=(TextView)convertView.findViewById(R.id.drinkName);
-        brandName=(TextView)convertView.findViewById(R.id.brandName);
-        calories=(TextView)convertView.findViewById(R.id.calories);
+        itemName= convertView.findViewById(R.id.drinkName);
+        brandName= convertView.findViewById(R.id.brandName);
+        calories= convertView.findViewById(R.id.calories);
 
-        BoozeFiles drink=drinks.get(position);
+        Nutrition drink=drinks.get(position);
 
-        itemName.setText(drink.readDrink(drink));
-       //` brandName.setText(drink.getBrandName());
-        calories.setText(drink.readCalories(drink));
+        itemName.setText(drink.getItemName());
+        brandName.setText(drink.getBrandName());
+        calories.setText(drink.getCalories());
 
         return convertView;
     }

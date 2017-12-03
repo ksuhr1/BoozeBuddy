@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -17,6 +20,7 @@ public class EditInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editinfo);
+        getSupportActionBar().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(),R.drawable.background_color, null));
         final TextView name = (TextView)findViewById(R.id.nameval);
         final TextView weight = (TextView)findViewById(R.id.weightval);
         final TextView height = (TextView)findViewById(R.id.heightval);
@@ -30,6 +34,21 @@ public class EditInfo extends AppCompatActivity {
         sex.setText(tracker.getString("sex", "sex"));
 
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu) {
+        switch (menu.getItemId()) {
+            case R.id.action_mainmenu:
+                Intent intent = new Intent(EditInfo.this, MainActivity.class);
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(menu);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_hamburger, menu);
+        return true;
     }
 
     public void saveinfo(View view){
@@ -45,7 +64,7 @@ public class EditInfo extends AppCompatActivity {
         infoeditor.putString("height" , height.getText().toString());
         infoeditor.putInt("age" , Integer.parseInt(age.getText().toString()));
         infoeditor.putString("sex" , sex.getText().toString());
-        infoeditor.commit();
+        infoeditor.apply();
         finish();
 
     }
