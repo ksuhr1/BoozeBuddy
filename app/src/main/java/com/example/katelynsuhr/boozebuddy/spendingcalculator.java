@@ -22,7 +22,7 @@ public class spendingcalculator extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spendingcalculator);
-        getSupportActionBar().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(),R.drawable.background_color, null));
+//        getSupportActionBar().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(),R.drawable.background_color, null));
 
         number1 = (EditText)findViewById(R.id.Number1);
         number2 = (EditText)findViewById(R.id.Number2);

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.text.DecimalFormat;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.res.ResourcesCompat;
@@ -14,10 +16,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Chronometer;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class partymode extends AppCompatActivity {
+
+    TextView timer ;
+    Button start; ;
+    long MillisecondTime, StartTime, TimeBuff, UpdateTime = 0L ;
+    Handler handler;
+    int Seconds, Minutes, MilliSeconds ;
 
 
     @Override
@@ -41,6 +57,9 @@ public class partymode extends AppCompatActivity {
         wineeditor.commit();
         beereditor.commit();
         soloeditor.commit();
+        timer = (TextView)findViewById(R.id.timer);
+        start = (Button)findViewById(R.id.startparty);
+        handler = new Handler() ;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem menu) {
@@ -64,7 +83,6 @@ public class partymode extends AppCompatActivity {
         int value = (shottracker.getInt("shotnumber",0) + 1);
         shoteditor.putInt("shotnumber", value);
         shoteditor.commit();
-        Toast.makeText(partymode.this, Integer.toString(shottracker.getInt("shotnumber", 0)), Toast.LENGTH_SHORT).show();
         calculateBAC();
 
     }
@@ -75,7 +93,6 @@ public class partymode extends AppCompatActivity {
         int value = winetracker.getInt("winenumber",0) + 1;
         wineeditor.putInt("winenumber", value);
         wineeditor.commit();
-        Toast.makeText(partymode.this, Integer.toString(winetracker.getInt("winenumber", 0)), Toast.LENGTH_SHORT).show();
         calculateBAC();
     }
 
@@ -85,7 +102,6 @@ public class partymode extends AppCompatActivity {
         int value = beertracker.getInt("beernumber",0) + 1;
         beereditor.putInt("beernumber", value);
         beereditor.commit();
-        Toast.makeText(partymode.this, Integer.toString(beertracker.getInt("beernumber", 0)), Toast.LENGTH_SHORT).show();
         calculateBAC();
     }
 
@@ -95,7 +111,6 @@ public class partymode extends AppCompatActivity {
         int value = solotracker.getInt("solonumber",0) + 1;
         soloeditor.putInt("solonumber", value);
         soloeditor.commit();
-        Toast.makeText(partymode.this, Integer.toString(solotracker.getInt("solonumber", 0)), Toast.LENGTH_SHORT).show();
         calculateBAC();
     }
 
@@ -112,12 +127,54 @@ public class partymode extends AppCompatActivity {
                 + beertracker.getInt("beernumber", 0) + solotracker.getInt("solonumber", 0);
         weightDouble = Double.parseDouble(tracker.getString("weight", null));
         drinkDouble = drinknumber;
-        timeDouble = 1;
-
+        timeDouble = Minutes%60 + 1;
         BACDouble = (((drinkDouble * 12 * 0.05) * 5.14) / (weightDouble * .73)) - (0.015 * timeDouble);
         DecimalFormat newDouble = new DecimalFormat("#.###");
         BACshow.setText(newDouble.format(BACDouble) + " % BAC");
 
+    }
+
+    public void startparty(View view){
+
+        StartTime = SystemClock.uptimeMillis();
+        handler.postDelayed(runnable, 0);
+        Button timer = (Button)findViewById(R.id.startparty);
+        if(timer.getText()=="Stop"){
+            TimeBuff += MillisecondTime;
+
+            handler.removeCallbacks(runnable);
+        }
+        timer.setText("Stop");
+
+
+    }
+
+    public Runnable runnable = new Runnable() {
+
+        public void run() {
+
+            MillisecondTime = SystemClock.uptimeMillis() - StartTime;
+
+            UpdateTime = TimeBuff + MillisecondTime;
+
+            Seconds = (int) (UpdateTime / 1000);
+
+            Minutes = Seconds / 60;
+
+            Seconds = Seconds % 60;
+
+            MilliSeconds = (int) (UpdateTime % 1000);
+
+            timer.setText("" + Minutes + ":"
+                    + String.format("%02d", Seconds) + ":"
+                    + String.format("%03d", MilliSeconds));
+
+            handler.postDelayed(this, 0);
+        }
+
+    };
+
+    public void onBackPressed(){
     }
 
 

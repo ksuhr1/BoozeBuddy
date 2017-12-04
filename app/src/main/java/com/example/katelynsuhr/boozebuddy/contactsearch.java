@@ -90,6 +90,7 @@ public class contactsearch extends Activity {
         safetynumedit.commit();
         safetyedit.putString("safetylist", safetylist.getString("safetylist", "") + name + "/");
         safetyedit.commit();
+        Toast.makeText(this, number, Toast.LENGTH_SHORT).show();
         entercontact.setText(safetylist.getString("safetylist", ""));
     }
 

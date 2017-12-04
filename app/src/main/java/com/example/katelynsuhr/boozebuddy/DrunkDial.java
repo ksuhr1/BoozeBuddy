@@ -1,6 +1,7 @@
 package com.example.katelynsuhr.boozebuddy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -39,6 +41,17 @@ public class DrunkDial extends AppCompatActivity {
         }
         adapter = new ArrayAdapter(DrunkDial.this, R.layout.mytextview, listlist);
         list.setAdapter(adapter);
-    }
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                SharedPreferences textname = getSharedPreferences("textname", Context.MODE_PRIVATE);
+                SharedPreferences.Editor nameeditor = textname.edit();
+                nameeditor.putString("name", list.getItemAtPosition(position).toString());
+                nameeditor.commit();
+                Intent intent = new Intent(DrunkDial.this, SendText.class);
+                startActivity(intent);
+            }
 
+        });
+    }
 }

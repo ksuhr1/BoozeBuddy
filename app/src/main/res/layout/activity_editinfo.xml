@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/edit_contacts"
-        android:onClick="editcontacts"/>
+        android:onClick="editcontacts"
+        android:background="@drawable/background_color"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -124,6 +125,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="saveinfo"
-        android:text="@string/save_information" />
+        android:text="@string/save_information"
+        android:background="@drawable/background_color"/>
 
 </LinearLayout>

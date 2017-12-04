@@ -1,10 +1,7 @@
 <resources>
     <string name="app_name">BoozeBuddy</string>
-    <string name="title_activity_user_profile">UserProfile</string>
     <string name="title_activity_safety">safety</string>
-    <string name="title_activity_blocked">blocked</string>
     <string name="title_activity_contact_view">ContactView</string>
-    <string name="title_activity_contactsearch">contactsearch</string>
     <string name="profile">Profile</string>
     <string name="diary">DIARY</string>
     <string name="party_mode">PARTY MODE</string>
@@ -21,9 +18,6 @@
     <string name="sex">Sex</string>
     <string name="edit_contacts">Edit Contacts</string>
     <string name="save_information">Save Information</string>
-    <string name="textview">TextView</string>
-    <string name="title_activity_baccalculator">BACCalculator</string>
-    <string name="title_activity_spendingcalculator">spendingcalculator</string>
     <string name="add_drink">Add Drink</string>
     <string name="main_menu">Main Menu</string>
     <string name="drink_name">Drink Name</string>
@@ -34,4 +28,7 @@
     <string name="calories">Calories</string>
     <string name="view_blocked">view blocked</string>
     <string name="title_activity_drunk_dial">DrunkDial</string>
+    <string name="title_activity_send_text">SendText</string>
+    <string name="start">Start</string>
+    <string name="time_spent_partying">Time Spent Partying</string>
 </resources>

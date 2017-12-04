@@ -5,7 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.katelynsuhr.boozebuddy.partymode"
-    tools:showIn="@layout/activity_partymode">
+    tools:context="com.example.katelynsuhr.boozebuddy.SendText"
+    tools:showIn="@layout/activity_send_text"
+    android:background="@drawable/background_color">
 
+    <ListView
+        android:id="@+id/messageview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </android.support.constraint.ConstraintLayout>

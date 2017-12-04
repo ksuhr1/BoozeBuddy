@@ -42,9 +42,9 @@ class BoozeFiles {
     }
     //void writeDrink(String drink, String calories, String brand, String nutrients)
 
-    void writeDrink(String id, String drink, String calories, String brand) {
 
-    void writeDrink(BoozeFiles file, String drink, String calories, String nutrients) {
+
+    void writeDrink(String id, String drink, String calories, String brand) {
         try {
             FileOutputStream writer = new FileOutputStream(file, true);
             writer.write((id +"/").getBytes());

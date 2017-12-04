@@ -60,7 +60,7 @@ public class DrinkOutput extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.macronutrient_list);
-        TextView input = (TextView) findViewById(R.id.textView1);
+        //TextView input = (TextView) findViewById(R.id.textView1);
         getSupportActionBar().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(),R.drawable.background_color, null));
         Intent i = getIntent();
         Bundle b = i.getExtras();

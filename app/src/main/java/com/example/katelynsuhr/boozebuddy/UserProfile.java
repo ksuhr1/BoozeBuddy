@@ -101,7 +101,7 @@ public class UserProfile extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(menu);
-
+    }
 
     public void blockcontact(View view){
         TelecomManager telecomManager = (TelecomManager) getSystemService(Context.TELECOM_SERVICE);

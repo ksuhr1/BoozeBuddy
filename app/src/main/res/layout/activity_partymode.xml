@@ -1,69 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/BACshow"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_gravity="center"
-        />
-    <LinearLayout
-        android:layout_height="0dp"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-        <ImageButton
-            android:id="@+id/shotbutton"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:onClick="shotbutton"
-            android:scaleType="fitXY"
-            android:background="@android:color/transparent"
-            android:padding="0dp"
-            android:src="@mipmap/shotglass_outline"
-         />
-        <ImageButton
-            android:id="@+id/beerbutton"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:onClick="beerbutton"
-            android:scaleType="fitXY"
-            android:background="@android:color/transparent"
-            android:padding="0dp"
-            android:src="@mipmap/beeroutline"
-         />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_height="0dp"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-        <ImageButton
-            android:id="@+id/winebutton"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:onClick="winebutton"
-            android:scaleType="fitXY"
-            android:background="@android:color/transparent"
-            android:padding="0dp"
-            android:src="@mipmap/wineoutline"
-            />
-        <ImageButton
-            android:id="@+id/solobutton"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:onClick="solobutton"
-            android:scaleType="fitXY"
-            android:background="@android:color/transparent"
-            android:padding="0dp"
-            android:src="@mipmap/solooutline"
-            />
-    </LinearLayout>
-</LinearLayout>
+            android:orientation="vertical"
+            android:background="@drawable/background_color">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/shotbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="shotbutton"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitStart"
+                    app:srcCompat="@mipmap/shotglass_outline"
+                    />
+
+                <ImageButton
+                    android:id="@+id/beerbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="beerbutton"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitStart"
+                    app:srcCompat="@mipmap/beeroutline" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/BACshow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Estimated BAC"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:layout_centerInParent="true" />
+
+            <Button
+                android:id="@+id/startparty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="startparty"
+                android:text="@string/start"
+                android:textStyle="bold"
+                android:background="@android:color/transparent"/>
+
+            <TextView
+                android:id="@+id/timer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/time_spent_partying" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight=".5">
+
+                <ImageButton
+                    android:id="@+id/solobutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="solobutton"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitStart"
+                    app:srcCompat="@mipmap/solooutline" />
+
+                <ImageButton
+                    android:id="@+id/winebutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="winebutton"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitStart"
+                    app:srcCompat="@mipmap/wineoutline" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
