@@ -31,4 +31,7 @@
     <string name="title_activity_send_text">SendText</string>
     <string name="start">Start</string>
     <string name="time_spent_partying">Time Spent Partying</string>
+    <string name="add_message">Add Message</string>
+    <string name="title_activity_msgedit">msgedit</string>
+    <string name="save">Save</string>
 </resources>

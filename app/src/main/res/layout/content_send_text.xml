@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,8 +9,20 @@
     tools:showIn="@layout/activity_send_text"
     android:background="@drawable/background_color">
 
+    <Button
+        android:id="@+id/addmsg"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/add_message"
+        android:onClick="addmsg"
+        android:background="@drawable/background_color"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="8dp" />
+
     <ListView
         android:id="@+id/messageview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+</RelativeLayout>

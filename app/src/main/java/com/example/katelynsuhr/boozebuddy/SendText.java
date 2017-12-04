@@ -45,6 +45,19 @@ public class SendText extends AppCompatActivity {
         list.setAdapter(adapter);
         SharedPreferences textname = getSharedPreferences("textname", Context.MODE_PRIVATE);
         name = textname.getString("name", "");
+        SharedPreferences newmsg = getSharedPreferences("custommsg", Context.MODE_PRIVATE);
+        String custommsg = newmsg.getString("custommsg", "");
+        String singlemsg = "";
+        int track = 0;
+        for(int i = 0; i < custommsg.length(); i++){
+            if(custommsg.charAt(i)== '/'){
+                listlist.add(singlemsg);
+                singlemsg = "";
+                track++;
+            } else {
+                singlemsg = singlemsg + Character.toString(custommsg.charAt(i));
+            }
+        }
         list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -54,6 +67,11 @@ public class SendText extends AppCompatActivity {
         });
 
 
+    }
+
+    public void addmsg(View view){
+        Intent intent = new Intent(SendText.this, msgedit.class);
+        startActivity(intent);
     }
 
     protected void sendSMSMessage(String name, String msg) {
@@ -70,6 +88,10 @@ public class SendText extends AppCompatActivity {
                         MY_PERMISSIONS_REQUEST_SEND_SMS);
 
             }
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.SEND_SMS},
+                    MY_PERMISSIONS_REQUEST_SEND_SMS);
         }
     }
 
@@ -81,7 +103,7 @@ public class SendText extends AppCompatActivity {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     SmsManager smsManager = SmsManager.getDefault();
                     smsManager.sendTextMessage(phoneNo, null, message, null, null);
-                    Toast.makeText(getApplicationContext(), phoneNo + " " + message,
+                    Toast.makeText(getApplicationContext(), "Message successfully sent",
                             Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getApplicationContext(),

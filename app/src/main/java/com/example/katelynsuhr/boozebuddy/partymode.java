@@ -125,11 +125,11 @@ public class partymode extends AppCompatActivity {
         int drinknumber = 0;
         drinknumber = drinknumber + shottracker.getInt("shotnumber", 0) + winetracker.getInt("winenumber", 0)
                 + beertracker.getInt("beernumber", 0) + solotracker.getInt("solonumber", 0);
-        weightDouble = Double.parseDouble(tracker.getString("weight", null));
+        weightDouble = Double.parseDouble(tracker.getString("weight", ""));
         drinkDouble = drinknumber;
         timeDouble = Minutes%60 + 1;
         BACDouble = (((drinkDouble * 12 * 0.05) * 5.14) / (weightDouble * .73)) - (0.015 * timeDouble);
-        DecimalFormat newDouble = new DecimalFormat("#.###");
+        DecimalFormat newDouble = new DecimalFormat("#.r###");
         BACshow.setText(newDouble.format(BACDouble) + " % BAC");
 
     }
