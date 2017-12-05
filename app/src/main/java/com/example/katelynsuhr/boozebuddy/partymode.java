@@ -119,7 +119,7 @@ shottracker = getSharedPreferences("shotbutton", Context.MODE_PRIVATE);
     public void solobutton(View view){
         final SharedPreferences solotracker = getSharedPreferences("solobutton", Context.MODE_PRIVATE);
         final SharedPreferences.Editor soloeditor = solotracker.edit();
-        int value = solotracker.getInt("solonumber",0) + 1;
+        int value = solotracker.getInt("solonumber",0) + 2;
         soloeditor.putInt("solonumber", value);
         soloeditor.commit();
         calculateBAC();
@@ -136,6 +136,10 @@ shottracker = getSharedPreferences("shotbutton", Context.MODE_PRIVATE);
         int drinknumber = 0;
         drinknumber = drinknumber + shottracker.getInt("shotnumber", 0) + winetracker.getInt("winenumber", 0)
                 + beertracker.getInt("beernumber", 0) + solotracker.getInt("solonumber", 0);
+        if(tracker.getString("weight", "") == "") {
+            Toast.makeText(partymode.this, "Please edit your user information", Toast.LENGTH_SHORT).show();
+            finish();
+        }
         weightDouble = Double.parseDouble(tracker.getString("weight", ""));
         drinkDouble = drinknumber;
         timeDouble = Minutes%60 + 1;

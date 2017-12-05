@@ -80,7 +80,7 @@
                     android:onClick="solobutton"
                     android:background="@android:color/transparent"
                     android:scaleType="fitStart"
-                    app:srcCompat="@mipmap/solooutline" />
+                    app:srcCompat="@mipmap/solooutline1" />
 
                 <ImageButton
                     android:id="@+id/winebutton"
