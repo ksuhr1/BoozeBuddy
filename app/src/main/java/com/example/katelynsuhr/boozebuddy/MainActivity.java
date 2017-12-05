@@ -21,13 +21,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro_menu);
         getSupportActionBar().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(),R.drawable.background_color, null));
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.SECOND, 5);
-
-        Intent intent = new Intent("tips.action.DISPLAY_NOTIFICATION");
-        PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, intent , PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), broadcast );
     }
 
     public void diary_main (View view){

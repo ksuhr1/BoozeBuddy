@@ -16,7 +16,7 @@ import android.support.v4.app.NotificationCompat;
 public class AlarmReciever extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent){
-        Intent notificationIntent = new Intent(context, MainActivity.class);
+        Intent notificationIntent = new Intent(context, EditInfo.class);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(NotificationActivity.class);

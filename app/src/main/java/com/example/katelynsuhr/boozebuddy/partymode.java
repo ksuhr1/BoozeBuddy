@@ -1,12 +1,14 @@
 
 package com.example.katelynsuhr.boozebuddy;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.text.DecimalFormat;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -34,32 +36,41 @@ public class partymode extends AppCompatActivity {
     long MillisecondTime, StartTime, TimeBuff, UpdateTime = 0L ;
     Handler handler;
     int Seconds, Minutes, MilliSeconds ;
-
-
+    SharedPreferences partytracker;
+    SharedPreferences.Editor partyedit;
+    SharedPreferences bac;
+    SharedPreferences.Editor bacedit;
+    SharedPreferences shottracker, winetracker, beertracker, solotracker;
+    SharedPreferences.Editor shoteditor, wineeditor, beereditor, soloeditor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final SharedPreferences shottracker = getSharedPreferences("shotbutton", Context.MODE_PRIVATE);
-        final SharedPreferences winetracker = getSharedPreferences("winebutton", Context.MODE_PRIVATE);
-        final SharedPreferences beertracker = getSharedPreferences("beerbutton", Context.MODE_PRIVATE);
-        final SharedPreferences solotracker = getSharedPreferences("solobutton", Context.MODE_PRIVATE);
-        final SharedPreferences.Editor shoteditor = shottracker.edit();
-        final SharedPreferences.Editor wineeditor = winetracker.edit();
-        final SharedPreferences.Editor beereditor = beertracker.edit();
-        final SharedPreferences.Editor soloeditor = solotracker.edit();
+        partytracker = getSharedPreferences("partytrack", Context.MODE_PRIVATE);
+        partyedit  = partytracker.edit();
+        bac = getSharedPreferences("partytrack", Context.MODE_PRIVATE);
+        bacedit = bac.edit();
+shottracker = getSharedPreferences("shotbutton", Context.MODE_PRIVATE);
+  winetracker = getSharedPreferences("winebutton", Context.MODE_PRIVATE);
+ beertracker = getSharedPreferences("beerbutton", Context.MODE_PRIVATE);
+     solotracker = getSharedPreferences("solobutton", Context.MODE_PRIVATE);
+         shoteditor = shottracker.edit();
+         wineeditor = winetracker.edit();
+        beereditor = beertracker.edit();
+        soloeditor = solotracker.edit();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partymode);
         getSupportActionBar().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(),R.drawable.background_color, null));
-        shoteditor.putInt("shotnumber", 0);
-        wineeditor.putInt("winenumber", 0);
-        beereditor.putInt("beernumber", 0);
-        soloeditor.putInt("solonumber", 0);
-        shoteditor.commit();
-        wineeditor.commit();
-        beereditor.commit();
-        soloeditor.commit();
         timer = (TextView)findViewById(R.id.timer);
         start = (Button)findViewById(R.id.startparty);
         handler = new Handler() ;
+        if(!(partytracker.getBoolean("party", false))){
+            start.setText("Start");
+        } else {
+            start.setText("Stop");
+            TextView BACshow = (TextView)findViewById(R.id.BACshow);
+            DecimalFormat newDouble = new DecimalFormat("#.###");
+            BACshow.setText(newDouble.format(bac.getFloat("bac", 0)) + " % BAC");
+            startTime();
+        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem menu) {
@@ -129,22 +140,53 @@ public class partymode extends AppCompatActivity {
         drinkDouble = drinknumber;
         timeDouble = Minutes%60 + 1;
         BACDouble = (((drinkDouble * 12 * 0.05) * 5.14) / (weightDouble * .73)) - (0.015 * timeDouble);
-        DecimalFormat newDouble = new DecimalFormat("#.r###");
+        DecimalFormat newDouble = new DecimalFormat("#.###");
         BACshow.setText(newDouble.format(BACDouble) + " % BAC");
+        double orig = BACDouble;
+        float f = (float) orig;
+        bacedit.putFloat("bac", f);
+        bacedit.commit();
 
     }
 
-    public void startparty(View view){
-
-        StartTime = SystemClock.uptimeMillis();
+    public void startTime(){
+        SharedPreferences time = getSharedPreferences("time", Context.MODE_PRIVATE);
+        StartTime = time.getLong("starttime", 0);
         handler.postDelayed(runnable, 0);
-        Button timer = (Button)findViewById(R.id.startparty);
-        if(timer.getText()=="Stop"){
-            TimeBuff += MillisecondTime;
+    }
 
+    public void startparty(View view){
+        SharedPreferences time = getSharedPreferences("time", Context.MODE_PRIVATE);
+        SharedPreferences.Editor timeedit = time.edit();
+        if (partytracker.getBoolean("party", false)) {
+            TimeBuff += MillisecondTime;
             handler.removeCallbacks(runnable);
+            start.setText("Start");
+            timer.setText("Time Spent Partying");
+            partyedit.putBoolean("party", false);
+            partyedit.commit();
+        } else {
+            TextView BACshow = (TextView)findViewById(R.id.BACshow);
+            BACshow.setText("Estimated BAC");
+            partyedit.putBoolean("party", true);
+            partyedit.commit();
+            StartTime = SystemClock.uptimeMillis();
+            timeedit.putLong("starttime", StartTime);
+            timeedit.commit();
+            handler.postDelayed(runnable, 0);
+            Button timer = (Button) findViewById(R.id.startparty);
+            timer.setText("Stop");
+            bacedit.putFloat("bac", 0);
+            shoteditor.putInt("shotnumber", 0);
+            wineeditor.putInt("winenumber", 0);
+            beereditor.putInt("beernumber", 0);
+            soloeditor.putInt("solonumber", 0);
+            shoteditor.commit();
+            wineeditor.commit();
+            beereditor.commit();
+            soloeditor.commit();
+
         }
-        timer.setText("Stop");
 
 
     }
@@ -173,12 +215,6 @@ public class partymode extends AppCompatActivity {
         }
 
     };
-
-    public void onBackPressed(){
-    }
-
-
-
 
 }
 
