@@ -49,7 +49,7 @@ public class UserProfile extends AppCompatActivity {
                 name = name + Character.toString(safelist.charAt(i));
             }
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerarray);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerarray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         final Spinner sItems = (Spinner) findViewById(R.id.safetyspinner);
         sItems.setAdapter(adapter);
@@ -57,7 +57,6 @@ public class UserProfile extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String name = sItems.getSelectedItem().toString();
-                Toast.makeText(UserProfile.this, name, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -112,19 +111,6 @@ public class UserProfile extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_hamburger, menu);
         return true;
     }
-
-//    public void filetest(View view){
-//        BoozeFiles file = new BoozeFiles("test", "testcategory", UserProfile.this);
-//        file.deleteFile(file);
-//        file.writeDrink(file, "Beer", "300", "glucose, lactose");
-//        file.writeDrink(file, "Vodka", "300", "glucose, lactose");
-//        file.writeDrink(file, "Wine", "300", "glucose, lactose");
-//        String stringtest = file.readFile(file);
-//        final TextView profilename = (TextView)findViewById(R.id.profileName);
-//        profilename.setText(file.readNutrients(file));
-//        Toast.makeText(UserProfile.this, stringtest, Toast.LENGTH_SHORT).show();
-//    }
-
 
 
 }

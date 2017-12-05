@@ -100,7 +100,16 @@
         <activity
             android:name=".msgedit"
             android:label="@string/title_activity_msgedit"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".NotificationActivity"
+                android:label="Notification"/>
+
+        <receiver android:name=".AlarmReciever">
+            <intent-filter>
+                <action android:name="tips.action.DISPLAY_NOTIFICATION" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
