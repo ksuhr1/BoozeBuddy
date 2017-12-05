@@ -17,14 +17,12 @@ public class UserInfo extends AppCompatActivity {
         setContentView(R.layout.activity_userinfo);
         final TextView name = (TextView)findViewById(R.id.nameshow);
         final TextView weight = (TextView)findViewById(R.id.weightshow);
-        final TextView height = (TextView)findViewById(R.id.heightshow);
         final TextView age= (TextView)findViewById(R.id.ageshow);
         final TextView sex = (TextView)findViewById(R.id.sexshow);
         SharedPreferences tracker = getSharedPreferences("userinfo", Context.MODE_PRIVATE);
         name.setText(tracker.getString("name", "name"));
         weight.setText(tracker.getString("weight", "weight"));
-        height.setText(tracker.getString("height", "height"));
-        age.setText(Integer.toString(tracker.getInt("age", 0)));
+        age.setText(tracker.getString("age", "0"));
         sex.setText(tracker.getString("sex", "sex"));
     }
     public void edituserinfo (View view){
