@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +42,11 @@ public class CalendarAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
+
+    public void clearData() {
+        // clear the data
+        drinks.clear();
+    }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
        // View rowView = convertView;
@@ -59,12 +65,14 @@ public class CalendarAdapter extends BaseAdapter {
         itemName= convertView.findViewById(R.id.drinkName);
         brandName= convertView.findViewById(R.id.brandName);
         calories= convertView.findViewById(R.id.calories);
+       // totalCal = convertView.findViewById(R.id.addCalories);
 
         Nutrition drink=drinks.get(position);
 
         itemName.setText(drink.getItemName());
         brandName.setText(drink.getBrandName());
         calories.setText(drink.getCalories());
+//        totalCal.setText(drink.getTotalCal());
 
         return convertView;
     }

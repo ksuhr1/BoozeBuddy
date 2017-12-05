@@ -14,7 +14,7 @@
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="231dp"
-        android:background="#b0000000"
+        android:background="@drawable/background_color"
         android:dateTextAppearance="@style/CalenderViewDateCustomText"
         android:drawableLeft="@mipmap/borderhouse"
         android:drawablePadding="2dip"
@@ -27,43 +27,76 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#f9f6f6"
         android:orientation="horizontal"
-        android:weightSum="1"
-        android:background="#f9f6f6">
+        android:weightSum="1">
 
         <TextView
             android:id="@+id/my_drinks"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="10dp"
-            android:paddingStart="10dp"
-            android:paddingRight="0dp"
-            android:text="@string/my_drinks"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:textSize="20sp" />
-        <!--<TextView-->
-            <!--android:id="@+id/textView6"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="48dp"-->
-            <!--android:layout_gravity="right"-->
-            <!--android:layout_weight="0.26"-->
-            <!--android:paddingBottom="10dp"-->
-            <!--android:paddingTop="10dp" />-->
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:paddingRight="0dp"
+            android:paddingStart="10dp"
+            android:text="@string/my_drinks"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold" />
+
         <Button
             android:id="@+id/button"
-            android:layout_width="35dp"
+            android:layout_width="56dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
-            android:drawableLeft="@drawable/ic_add_circle_outline_black_24dp"
             android:background="@drawable/background_transparent"
+            android:drawableLeft="@mipmap/ic_plusbutton"
             android:drawablePadding="2dip"
             android:onClick="foodClick"
             android:textSize="12sp" />
 
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="386dp"
+        android:layout_height="33dp"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f9f6f6"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/title_Calories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="0dp"
+                android:paddingStart="10dp"
+                android:text="Total Calories:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/addCalories"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left"
+                android:background="@drawable/background_transparent"
+                android:drawablePadding="2dip"
+                android:paddingLeft="10dp"
+                android:paddingRight="0dp"
+                android:text="153"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 
 
@@ -73,9 +106,9 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="#FFFFFF"
+        android:descendantFocusability="blocksDescendants"
         android:divider="#5aa49f"
-        android:dividerHeight="2px"
-        android:descendantFocusability="blocksDescendants"/>
+        android:dividerHeight="2px" />
 
 
 </LinearLayout>

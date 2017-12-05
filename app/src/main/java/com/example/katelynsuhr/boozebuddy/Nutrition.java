@@ -7,7 +7,7 @@ package com.example.katelynsuhr.boozebuddy;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class Nutrition implements Serializable{
+public class Nutrition implements Serializable {
 
     String itemName;
     String itemId;
@@ -15,6 +15,7 @@ public class Nutrition implements Serializable{
     String Calories;
     String servingSize;
     String Quantity;
+    //String totalCal;
 
     public Nutrition(){
 
@@ -32,9 +33,11 @@ public class Nutrition implements Serializable{
     public String getItemId(){
         return itemId;
     }
+   // public String getTotalCal(){return totalCal;}
     public void setBrandName(String brandName){
         this.brandName = brandName;
     }
+    public void setNewBrandName(String brandName){this.brandName = brandName+"&";}
     public String getCalories(){
         return Calories;
     }
@@ -42,6 +45,7 @@ public class Nutrition implements Serializable{
         this.Calories = Calories;
     }
     public void setItemId(String itemId){ this.itemId = itemId;}
+   // public void setTotalCal(String totalCal){this.totalCal = totalCal;}
     public String getServingSize(){
         return servingSize;
     }

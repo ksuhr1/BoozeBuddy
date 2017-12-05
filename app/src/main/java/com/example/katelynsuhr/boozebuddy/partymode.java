@@ -15,6 +15,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -112,6 +113,11 @@ shottracker = getSharedPreferences("shotbutton", Context.MODE_PRIVATE);
         final SharedPreferences.Editor beereditor = beertracker.edit();
         int value = beertracker.getInt("beernumber",0) + 1;
         beereditor.putInt("beernumber", value);
+//        SharedPreferences sharedPreferences = this.getSharedPreferences("DateDetails", Context.MODE_PRIVATE);
+//        String date = sharedPreferences.getString("date", "none");
+//        Toast.makeText(this, "Saving file to:"+date, Toast.LENGTH_LONG).show();
+//        String test = BoozeUtil.readFile(partymode.this, date);
+//        Log.i("Selected file:", test);
         beereditor.commit();
         calculateBAC();
     }
@@ -136,20 +142,20 @@ shottracker = getSharedPreferences("shotbutton", Context.MODE_PRIVATE);
         int drinknumber = 0;
         drinknumber = drinknumber + shottracker.getInt("shotnumber", 0) + winetracker.getInt("winenumber", 0)
                 + beertracker.getInt("beernumber", 0) + solotracker.getInt("solonumber", 0);
-        if(tracker.getString("weight", "") == "") {
+        if(tracker.getString("weight", "").equals("weight")) {
             Toast.makeText(partymode.this, "Please edit your user information", Toast.LENGTH_SHORT).show();
             finish();
         }
-        weightDouble = Double.parseDouble(tracker.getString("weight", ""));
-        drinkDouble = drinknumber;
-        timeDouble = Minutes%60 + 1;
-        BACDouble = (((drinkDouble * 12 * 0.05) * 5.14) / (weightDouble * .73)) - (0.015 * timeDouble);
-        DecimalFormat newDouble = new DecimalFormat("#.###");
-        BACshow.setText(newDouble.format(BACDouble) + " % BAC");
-        double orig = BACDouble;
-        float f = (float) orig;
-        bacedit.putFloat("bac", f);
-        bacedit.commit();
+            weightDouble = Double.parseDouble(tracker.getString("weight", ""));
+            drinkDouble = drinknumber;
+            timeDouble = Minutes % 60 + 1;
+            BACDouble = (((drinkDouble * 12 * 0.05) * 5.14) / (weightDouble * .73)) - (0.015 * timeDouble);
+            DecimalFormat newDouble = new DecimalFormat("#.###");
+            BACshow.setText(newDouble.format(BACDouble) + " % BAC");
+            double orig = BACDouble;
+            float f = (float) orig;
+            bacedit.putFloat("bac", f);
+            bacedit.commit();
 
     }
 

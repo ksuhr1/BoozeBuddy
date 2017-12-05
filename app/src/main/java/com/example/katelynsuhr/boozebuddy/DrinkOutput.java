@@ -161,12 +161,13 @@ public class DrinkOutput extends AppCompatActivity {
             case R.id.action_add_drink:
                 SharedPreferences sharedPreferences = this.getSharedPreferences("DateDetails", Context.MODE_PRIVATE);
                 String date = sharedPreferences.getString("date", "none");
-                Toast.makeText(this, date, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Saving file to:"+date, Toast.LENGTH_LONG).show();
 
                 final BoozeFiles file = new BoozeFiles(date, "FoodList", DrinkOutput.this);
                     try {
                         file.writeDrink(item, details.getString("item_name"), details.getString("nf_calories"), details.getString("brand_name"));
-                        Log.i("OUTPUT", file.readFile());
+                       // Log.i("OUTPUT", file.readFile());
+                       // Toast.makeText(this,"OUTPUT2"+file.readFile(),Toast.LENGTH_LONG).show();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

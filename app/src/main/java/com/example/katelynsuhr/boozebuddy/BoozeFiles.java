@@ -16,19 +16,19 @@ import java.nio.charset.CharacterCodingException;
  */
 
 class BoozeFiles {
-        private File file;
-        private File path;
-        private String category;
-        private String name;
-        private int date;
+    private File file;
+    private File path;
+    private String category;
+    private String name;
+    private int date;
 
 
-        BoozeFiles(String name, String category, Context context) {
-            this.name = name;
-            this.category = category;
-            this.path = context.getFilesDir();
-            this.file = new File(path, name);
-        }
+    BoozeFiles(String name, String category, Context context) {
+        this.name = name;
+        this.category = category;
+        this.path = context.getFilesDir();
+        this.file = new File(path, name);
+    }
 
     void writeFile(BoozeFiles file, String data) {
         try {
@@ -50,8 +50,8 @@ class BoozeFiles {
             writer.write((id +"/").getBytes());
             writer.write((drink + "/").getBytes());
             writer.write((calories + "/").getBytes());
-            writer.write((brand + "/").getBytes());
-           // writer.write((nutrients + "/").getBytes());
+            writer.write((brand + "/"+"\n").getBytes());
+            // writer.write((nutrients + "/").getBytes());
             writer.close();
         } catch (IOException ie) {
             ie.printStackTrace();
