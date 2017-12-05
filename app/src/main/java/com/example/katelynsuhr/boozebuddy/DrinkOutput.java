@@ -164,13 +164,12 @@ public class DrinkOutput extends AppCompatActivity {
                 Toast.makeText(this, date, Toast.LENGTH_LONG).show();
 
                 final BoozeFiles file = new BoozeFiles(date, "FoodList", DrinkOutput.this);
-                //file.deleteFile(file);
-                try {
-                    file.writeDrink(item, details.getString("item_name"), details.getString("nf_calories"), details.getString("brand_name"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                Log.i("OUTPUT", file.readFile());
+                    try {
+                        file.writeDrink(item, details.getString("item_name"), details.getString("nf_calories"), details.getString("brand_name"));
+                        Log.i("OUTPUT", file.readFile());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 Intent intent = new Intent(DrinkOutput.this, DiaryMain.class);
                 startActivity(intent);
                 return true;

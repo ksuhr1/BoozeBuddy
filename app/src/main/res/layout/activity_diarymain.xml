@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:weightSum="1"
     android:layout_weight="0.6"
-    android:background="@drawable/background_color"
     android:drawableLeft="@mipmap/borderhouse"
     android:drawablePadding="2dip"
     android:drawableStart="@mipmap/borderhouse">
@@ -14,14 +13,16 @@
     <CalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
-        android:layout_height="305dp"
-        android:alpha="0.85"
+        android:layout_height="231dp"
+        android:background="#b0000000"
+        android:dateTextAppearance="@style/CalenderViewDateCustomText"
         android:drawableLeft="@mipmap/borderhouse"
         android:drawablePadding="2dip"
         android:drawableStart="@mipmap/borderhouse"
-        android:weekNumberColor="#000"
         android:state_selected="true"
-        />
+        android:theme="@style/CalenderViewCustom"
+        android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
+        android:weekNumberColor="#fff" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +44,14 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:textSize="20sp" />
-
+        <!--<TextView-->
+            <!--android:id="@+id/textView6"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="48dp"-->
+            <!--android:layout_gravity="right"-->
+            <!--android:layout_weight="0.26"-->
+            <!--android:paddingBottom="10dp"-->
+            <!--android:paddingTop="10dp" />-->
         <Button
             android:id="@+id/button"
             android:layout_width="35dp"
@@ -54,19 +62,20 @@
             android:drawablePadding="2dip"
             android:onClick="foodClick"
             android:textSize="12sp" />
-        <!--android:text="Add Drink"-->
+
 
     </LinearLayout>
 
 
-    <ListView
+    <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/drink_listview"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="#FFFFFF"
         android:divider="#5aa49f"
-        android:dividerHeight="2px" />
+        android:dividerHeight="2px"
+        android:descendantFocusability="blocksDescendants"/>
 
 
 </LinearLayout>

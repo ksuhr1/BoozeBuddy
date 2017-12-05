@@ -3,37 +3,52 @@ package com.example.katelynsuhr.boozebuddy;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
-import android.preference.PreferenceManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.CalendarView;
-import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
+import java.util.Objects;
+
+import android.os.Handler;
 
 public class DiaryMain extends AppCompatActivity {
-    private ListView listView2;
+
+
+    private static final int SWIPE_MIN_DISTANCE = 120;
+    private static final int SWIPE_MAX_OFF_PATH = 250;
+    private static final int SWIPE_THRESHOLD_VELOCITY = 200;
+   // private GestureDetector detector = new GestureDetector(this, android.view.GestureDetector.OnGestureListener, Hand;er);
+   // private ListView listView2;
     public CalendarAdapter adapter2;
     private String date;
     String currentDate;
+    List<Nutrition> nutritions;
     Long dateChange;
     // private Calendar calendar = Calendar.getInstance();
 
@@ -81,9 +96,9 @@ public class DiaryMain extends AppCompatActivity {
         Toast.makeText(this, currentDate, Toast.LENGTH_LONG).show();
         String currentFile = BoozeUtil.readFile(this, currentDate);
         updateListView(currentDate);
-        if (BoozeUtil.isExist(this, currentDate)) {
-            Toast.makeText(this, "TRUE" + currentFile, Toast.LENGTH_LONG).show();
-        }
+//        if (BoozeUtil.isExist(this, currentDate)) {
+//            Toast.makeText(this, "TRUE" + currentFile, Toast.LENGTH_LONG).show();
+//        }
         //Checks if there is a file already created for the current date, if there is one,
         //if populates the list view with the drinks from that day
         if (BoozeUtil.isExist(this, currentDate)) {
@@ -91,16 +106,8 @@ public class DiaryMain extends AppCompatActivity {
         } else {
             return;
         }
+
     }
-//    public void setBackground(Drawable background) {
-//        //noinspection deprecation
-//        setBackgroundDrawable(background);
-//    }
-//
-//    @Deprecated
-//    public void setBackgroundDrawable(Drawable background) {
-//        getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.background_color));
-//    }
 
     /* List View helper function */
     public void updateListView(String selectedDate) {
@@ -108,18 +115,16 @@ public class DiaryMain extends AppCompatActivity {
         String stringTest = BoozeUtil.readFile(DiaryMain.this, selectedDate);
         // if(stringTest !=null) {
         List<String> items = Arrays.asList(stringTest.split("/"));
-        List<Nutrition> nutritions = new ArrayList<>();
+        nutritions = new ArrayList<>();
 
         Nutrition nutrition = null;
         for (int i = 0; i < items.size(); i++) {
             int remainder = i % 4;
-
             if (remainder == 0) {
                 nutrition = new Nutrition();
                 String l = items.get(i);
                 nutrition.setItemId(l);
             } else if (remainder == 1) {
-                //nutrition = new Nutrition();
                 String m = items.get(i);
                 assert nutrition != null;
                 nutrition.setItemName(m);
@@ -134,29 +139,74 @@ public class DiaryMain extends AppCompatActivity {
                 nutritions.add(nutrition);
             }
         }
-        listView2 = (ListView) findViewById(R.id.drink_listview);
+        final SwipeMenuListView listView2 = (SwipeMenuListView)findViewById(R.id.drink_listview);
         adapter2 = new CalendarAdapter(DiaryMain.this, nutritions);
         listView2.setAdapter(adapter2);
         adapter2.notifyDataSetChanged();
-//        }else{
-//            return;
-//        }
-        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Nutrition selectedFromList = (Nutrition) listView2.getItemAtPosition(position);
-                Log.i("POSITION", selectedFromList.toString());
-                Intent intent = new Intent(view.getContext(), DrinkOutput.class);
-                intent.putExtra("item_id", selectedFromList.getItemId());
-                intent.putExtra("brand_name", selectedFromList.getBrandName());
-                intent.putExtra("item_name", selectedFromList.getItemName());
-                intent.putExtra("nf_calories", selectedFromList.getCalories());
-                startActivity(intent);
 
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+            @Override
+            public void create(SwipeMenu menu) {
+                // create "open" item
+                SwipeMenuItem openItem = new SwipeMenuItem(
+                        getApplicationContext());
+                // set item background
+                openItem.setBackground(new ColorDrawable(Color.rgb(66, 149,154)));
+                // set item width
+                openItem.setWidth(170);
+                // set item title
+                openItem.setTitle("View");
+                // set item title fontsize
+                openItem.setTitleSize(18);
+                // set item title font color
+                openItem.setTitleColor(Color.WHITE);
+                // add to menu
+                menu.addMenuItem(openItem);
+                // create "delete" item
+                SwipeMenuItem deleteItem = new SwipeMenuItem(
+                        getApplicationContext());
+                // set item background
+                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
+                        0x3F, 0x25)));
+                // set item width
+                deleteItem.setWidth(170);
+                // set a icon
+                deleteItem.setIcon(R.drawable.ic_trash);
+                // add to menu
+                menu.addMenuItem(deleteItem);
+            }
+        };
+
+        listView2.setMenuCreator(creator);
+        listView2.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                Nutrition selectedFromList = (Nutrition) listView2.getItemAtPosition(position);
+                switch (index) {
+                    case 0:
+                        Log.i("POSITION", selectedFromList.toString());
+                        Intent intent = new Intent(menu.getContext(), DrinkOutput.class);
+                        intent.putExtra("item_id", selectedFromList.getItemId());
+                        intent.putExtra("brand_name", selectedFromList.getBrandName());
+                        intent.putExtra("item_name", selectedFromList.getItemName());
+                        intent.putExtra("nf_calories", selectedFromList.getCalories());
+                        startActivity(intent);
+                        Log.d(TAG, "onMenuItemClick: clicked item " + index);
+                        break;
+                    case 1:
+                        nutritions.remove(selectedFromList);
+                        Log.d(TAG, "Item"+selectedFromList.toString());
+                        adapter2.notifyDataSetChanged();
+                        Log.d(TAG, "onMenuItemClick: clicked item " + index);
+                        break;
+                }
+                // false : close the menu; true : not close the menu
+                return false;
             }
         });
-    }
 
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menu) {
@@ -179,7 +229,6 @@ public class DiaryMain extends AppCompatActivity {
         super.onSaveInstanceState(state);
         state.putSerializable("dateClicked", date);
     }
-
 
     public void foodClick (View view){
         Intent intent = new Intent(DiaryMain.this, DiarySearch.class);

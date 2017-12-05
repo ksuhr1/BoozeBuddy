@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by katelynsuhr on 11/29/17.
@@ -45,6 +46,10 @@ public final class BoozeUtil {
 
     public static boolean isExist(Context context, String name) {
         return new File(context.getFilesDir(), name).exists();
+    }
+
+    public static void deleteDrink(ArrayList<Nutrition>list, String search){
+
     }
 
 }

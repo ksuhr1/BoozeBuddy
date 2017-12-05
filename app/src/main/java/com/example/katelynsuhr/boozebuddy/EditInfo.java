@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -35,21 +33,6 @@ public class EditInfo extends AppCompatActivity {
 
 
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menu) {
-        switch (menu.getItemId()) {
-            case R.id.action_mainmenu:
-                Intent intent = new Intent(EditInfo.this, MainActivity.class);
-                startActivity(intent);
-                return true;
-        }
-        return super.onOptionsItemSelected(menu);
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_hamburger, menu);
-        return true;
-    }
 
     public void saveinfo(View view){
         SharedPreferences tracker = getSharedPreferences("userinfo", Context.MODE_PRIVATE);
@@ -62,9 +45,9 @@ public class EditInfo extends AppCompatActivity {
         infoeditor.putString("name" , name.getText().toString());
         infoeditor.putString("weight" , weight.getText().toString());
         infoeditor.putString("height" , height.getText().toString());
-        infoeditor.putInt("age" , Integer.parseInt(age.getText().toString()));
+        infoeditor.putString("age" , (age.getText().toString()));
         infoeditor.putString("sex" , sex.getText().toString());
-        infoeditor.apply();
+        infoeditor.commit();
         finish();
 
     }
@@ -75,5 +58,3 @@ public class EditInfo extends AppCompatActivity {
     }
 
 }
-
-

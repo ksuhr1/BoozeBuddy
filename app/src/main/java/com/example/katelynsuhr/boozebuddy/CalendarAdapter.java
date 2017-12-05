@@ -14,7 +14,7 @@ import java.util.List;
  * Created by katelynsuhr on 11/28/17.
  */
 
-public class CalendarAdapter extends BaseAdapter{
+public class CalendarAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private Activity activity;
     private List<Nutrition> drinks;
@@ -43,11 +43,13 @@ public class CalendarAdapter extends BaseAdapter{
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+       // View rowView = convertView;
 
 
 
         if(inflater==null){
             inflater=(LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
         }
         if(convertView ==null){
             convertView=inflater.inflate(R.layout.drink_list,null);

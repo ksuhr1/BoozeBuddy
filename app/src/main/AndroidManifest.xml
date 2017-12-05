@@ -72,7 +72,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".spendingcalculator"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="Spending Calculator"
+            android:parentActivityName=".UserProfile"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".DrunkDial"
             android:label="@string/title_activity_drunk_dial"
