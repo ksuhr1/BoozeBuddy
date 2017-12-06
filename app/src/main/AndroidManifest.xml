@@ -97,16 +97,29 @@
         <activity
             android:name=".msgedit"
             android:label="@string/title_activity_msgedit"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity android:name=".NotificationActivity"
-                android:label="Notification"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NotificationActivity"
+            android:label="Notification" />
 
         <receiver android:name=".AlarmReciever">
             <intent-filter>
                 <action android:name="tips.action.DISPLAY_NOTIFICATION" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".cocktail"
+            android:label="@string/title_activity_cocktail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".alarm"
+            android:label="@string/title_activity_alarm"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RingtonePlayingService"
+            android:label="@string/title_activity_ringtone_playing_service"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -38,4 +38,7 @@
     <string name="menu_add_5_items">Add 5 items</string>
     <string name="button_undo">undo</string>
     <string name="show_notification_details_here">Show Notification Details Here...</string>
+    <string name="title_activity_cocktail">cocktail</string>
+    <string name="title_activity_alarm">alarm</string>
+    <string name="title_activity_ringtone_playing_service">RingtonePlayingService</string>
 </resources>

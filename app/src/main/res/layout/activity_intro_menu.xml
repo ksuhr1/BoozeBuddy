@@ -75,7 +75,7 @@
 
     <Button
         android:id="@+id/button4"
-        android:text="@string/progress"
+        android:text="@string/title_activity_alarm"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
@@ -91,7 +91,8 @@
         android:paddingRight="85dp"
         android:paddingEnd="85dp"
         android:textColor="#FFFFFF"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:onClick="alarm"/>
 
     <Button
         android:id="@+id/button5"

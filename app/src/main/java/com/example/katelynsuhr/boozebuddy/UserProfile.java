@@ -112,6 +112,11 @@ public class UserProfile extends AppCompatActivity {
         return true;
     }
 
+    public void cocktail(View view){
+        Intent iintent = new Intent (UserProfile.this, cocktail.class);
+        startActivity(iintent);
+    }
+
 
 }
 
