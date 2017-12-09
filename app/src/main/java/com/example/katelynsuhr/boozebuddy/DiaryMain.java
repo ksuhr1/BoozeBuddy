@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.CalendarView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -47,15 +48,12 @@ public class DiaryMain extends AppCompatActivity {
     private static final int SWIPE_MIN_DISTANCE = 120;
     private static final int SWIPE_MAX_OFF_PATH = 250;
     private static final int SWIPE_THRESHOLD_VELOCITY = 200;
-   // private GestureDetector detector = new GestureDetector(this, android.view.GestureDetector.OnGestureListener, Hand;er);
-   // private ListView listView2;
+
     public CalendarAdapter adapter2;
     private String date;
     List<Nutrition> nutritions;
     String stringTest;
     List<String> items;
-    Long dateChange;
-    // private Calendar calendar = Calendar.getInstance();
 
     private static final String TAG = "CalendarActivity";
     private CalendarView mCalendarView;
@@ -72,18 +70,18 @@ public class DiaryMain extends AppCompatActivity {
         mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView CalendarView, int year, int month, int dayOfMonth) {
-                Toast toast = Toast.makeText(getBaseContext(),
-                        "Selected Date is\n\n" + (month + 1) + " / " + dayOfMonth + " / " + year,
-                        Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP | Gravity.CENTER_VERTICAL, 0, 0); //changes position Toast appears
-                toast.show();
+//                Toast toast = Toast.makeText(getBaseContext(),
+//                        "Selected Date is\n\n" + (month + 1) + " / " + dayOfMonth + " / " + year,
+//                        Toast.LENGTH_SHORT);
+               // toast.setGravity(Gravity.TOP | Gravity.CENTER_VERTICAL, 0, 0); //changes position Toast appears
+              //  toast.show();
                 date = month + "_" + dayOfMonth + "_" + year;
                 SharedPreferences sharedPreferences = getSharedPreferences("DateDetails", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("date", date);
                 editor.apply();
-                Toast toaster = Toast.makeText(getBaseContext(), "Date was saved successfully: " + sharedPreferences.contains("date"), Toast.LENGTH_LONG);
-                toaster.show();
+               // Toast toaster = Toast.makeText(getBaseContext(), "Date was saved successfully: " + sharedPreferences.contains("date"), Toast.LENGTH_LONG);
+               // toaster.show();
                 // if(BoozeUtil.isExist(DiaryMain.this, date)) {
                 //   updateListView(date);
                 // }
@@ -104,7 +102,7 @@ public class DiaryMain extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("date", date);
         editor.apply();
-        Toast toaster = Toast.makeText(getBaseContext(), "Date was saved successfully: " + sharedPreferences.contains("date"), Toast.LENGTH_LONG);
+      //  Toast toaster = Toast.makeText(getBaseContext(), "Date was saved successfully: " + sharedPreferences.contains("date"), Toast.LENGTH_LONG);
       //  updateListView(currentDate);
 //        if (BoozeUtil.isExist(this, currentDate)) {
 //            Toast.makeText(this, "TRUE" + currentFile, Toast.LENGTH_LONG).show();
@@ -122,12 +120,13 @@ public class DiaryMain extends AppCompatActivity {
 
 
     /* List View helper function */
-    public void updateListView(String selectedDate) {
+    public void updateListView(final String selectedDate) {
         // if(BoozeUtil.isExist(DiaryMain.this, selectedDate)){
         stringTest = BoozeUtil.readFile(DiaryMain.this, selectedDate);
         Log.i("stringTest", stringTest);
         // if(stringTest !=null) {
         items = Arrays.asList(stringTest.split("/"));
+        Toast.makeText(this,"StringTest"+items, Toast.LENGTH_LONG).show();
         nutritions = new ArrayList<>();
         final List<String> cal = new ArrayList<>();
         final int total = 0;
@@ -161,19 +160,19 @@ public class DiaryMain extends AppCompatActivity {
             } else if (remainder == 3) {
                 String p = items.get(i);
                 assert nutrition != null;
-                nutrition.setBrandName(p + "/");
+                nutrition.setBrandName(p);
                 nutritions.add(nutrition);
             }
-            int sum = 0;
-            for(String num : cal) {
-                Float a = Float.parseFloat(num);
-                int b = (int)Math.round(a);
-                sum+=b;
-            }
-            String stringCal = Float.toString(sum);
-            Log.d("MyInt","Total Calories = "+sum);
-//            TextView tv = (TextView) findViewById(R.id.addCalories);
-            tv.setText(stringCal);
+//            int sum = 0;
+//            for(String num : cal) {
+//                Float a = Float.parseFloat(num);
+//                int b = (int)Math.round(a);
+//                sum+=b;
+//            }
+//            String stringCal = Float.toString(sum);
+//            Log.d("MyInt","Total Calories = "+sum);
+////            TextView tv = (TextView) findViewById(R.id.addCalories);
+//            tv.setText(stringCal);
         }
 
         final SwipeMenuListView listView2 = (SwipeMenuListView)findViewById(R.id.drink_listview);
@@ -237,36 +236,30 @@ public class DiaryMain extends AppCompatActivity {
                         Log.i("File Data", stringTest);
                         Log.i("Items ", items.toString());
                         //items.get(selectedFromList);
-                        String data1 = nutritions.get(position).getCalories();
-                        cal.remove(data1);
+//                        String data1 = nutritions.get(position).getCalories();
+//                        cal.remove(data1);
                         Log.i("Remainder",cal.toString());
                         //int sum = 0;
                         String input = tv.getText().toString();
-                        float sumInput = Float.parseFloat(input);
-                        float deleteDrink = Float.parseFloat(data1);
-                        int difference = (int) Math.round(sumInput - deleteDrink);
-                        String result = Float.toString(difference);
-                        Log.d("MyInt","Total Calories = "+result);
-                        TextView tv = (TextView) findViewById(R.id.addCalories);
-                        tv.setText(result);
-                        Log.i("Selected Item", data1);
+//                        float sumInput = Float.parseFloat(input);
+//                        float deleteDrink = Float.parseFloat(data1);
+//                        int difference = (int) Math.round(sumInput - deleteDrink);
+//                        String result = Float.toString(difference);
+//                        Log.d("MyInt","Total Calories = "+result);
+//                        TextView tv = (TextView) findViewById(R.id.addCalories);
+//                        tv.setText(result);
+                        //og.i("Selected Item", data1);
                         nutritions.remove(selectedFromList);
                         String itemLine = selectedFromList.getItemId();
-
-                    //    String nutr = nutritions.toString();
-                      //  Log.i("Nutritions", nutr);
-                     //   BoozeUtil.writeFile(DiaryMain.this, nutr, date);
-
-                      //  Log.i("Nutrition arraylist",nutritions.toString());
-                       // Nutrition obj = listView2.getItemAtPosition(position).toString();
-                       // nutritions.remove(obj);
-                       // nutritions.remove(nutritions.indexOf(obj))
-                       // ArrayList<String> drinkValues =
+                        Log.d("itemLine", itemLine);
+                        BoozeUtil.removeDrink(DiaryMain.this, selectedDate, itemLine);
+                        adapter2.notifyDataSetChanged();
+                       // adapter2.notifyDataSetChanged();
 
                        // cal.remove(selectedFromList);
-                        Log.d(TAG, "Item"+selectedFromList.toString());
-                        adapter2.notifyDataSetChanged();
-                        Log.d(TAG, "onMenuItemClick: clicked item " + index);
+                       // Log.d(TAG, "Item"+selectedFromList.toString());
+                        //adapter2.notifyDataSetChanged();
+                        //Log.d(TAG, "onMenuItemClick: clicked item " + index);
                         break;
                 }
                 // false : close the menu; true : not close the menu
