@@ -72,7 +72,7 @@ public class DrinkOutput extends AppCompatActivity {
 
         drinkName = (TextView) findViewById(R.id.drink);
         brandName = (TextView) findViewById(R.id.brandName);
-        TextView numServings = (TextView) findViewById(R.id.numServings);
+       // TextView numServings = (TextView) findViewById(R.id.numServings);
         cal = (TextView) findViewById((R.id.calories));
         drinkName.setText(getIntent().getStringExtra("item_name"));
         cal.setText(getIntent().getStringExtra("nf_calories"));
@@ -122,7 +122,7 @@ public class DrinkOutput extends AppCompatActivity {
                             listView = (ListView) findViewById(R.id.macroNutrientResults);
                             adapter = new MacroNutrientAdapter(DrinkOutput.this, drinkMap);
                             listView.setAdapter(adapter);
-                            TextView numServings = (TextView) findViewById(R.id.numServings);
+                           // TextView numServings = (TextView) findViewById(R.id.numServings);
 //                            numServings.setText(details.getString("nf)serving_size_qty"));
                             //  numServings.append( drinkMap.put(replaceChar("nf_serving_size_qty"), details.getString("nf_serving_size_qty")));
 
@@ -161,7 +161,7 @@ public class DrinkOutput extends AppCompatActivity {
             case R.id.action_add_drink:
                 SharedPreferences sharedPreferences = this.getSharedPreferences("DateDetails", Context.MODE_PRIVATE);
                 String date = sharedPreferences.getString("date", "none");
-                Toast.makeText(this, "Saving file to:"+date, Toast.LENGTH_LONG).show();
+              //  Toast.makeText(this, "Saving file to:"+date, Toast.LENGTH_LONG).show();
 
                 final BoozeFiles file = new BoozeFiles(date, "FoodList", DrinkOutput.this);
                     try {

@@ -126,7 +126,7 @@ public class DiaryMain extends AppCompatActivity {
         Log.i("stringTest", stringTest);
         // if(stringTest !=null) {
         items = Arrays.asList(stringTest.split("/"));
-        Toast.makeText(this,"StringTest"+items, Toast.LENGTH_LONG).show();
+       // Toast.makeText(this,"StringTest"+items, Toast.LENGTH_LONG).show();
         nutritions = new ArrayList<>();
         final List<String> cal = new ArrayList<>();
         final int total = 0;
@@ -163,16 +163,16 @@ public class DiaryMain extends AppCompatActivity {
                 nutrition.setBrandName(p);
                 nutritions.add(nutrition);
             }
-//            int sum = 0;
-//            for(String num : cal) {
-//                Float a = Float.parseFloat(num);
-//                int b = (int)Math.round(a);
-//                sum+=b;
-//            }
-//            String stringCal = Float.toString(sum);
-//            Log.d("MyInt","Total Calories = "+sum);
-////            TextView tv = (TextView) findViewById(R.id.addCalories);
-//            tv.setText(stringCal);
+            int sum = 0;
+            for(String num : cal) {
+                Float a = Float.parseFloat(num);
+                int b = (int)Math.round(a);
+                sum+=b;
+            }
+            String stringCal = Float.toString(sum);
+            Log.d("MyInt","Total Calories = "+sum);
+//            TextView tv = (TextView) findViewById(R.id.addCalories);
+            tv.setText(stringCal);
         }
 
         final SwipeMenuListView listView2 = (SwipeMenuListView)findViewById(R.id.drink_listview);
@@ -236,19 +236,19 @@ public class DiaryMain extends AppCompatActivity {
                         Log.i("File Data", stringTest);
                         Log.i("Items ", items.toString());
                         //items.get(selectedFromList);
-//                        String data1 = nutritions.get(position).getCalories();
-//                        cal.remove(data1);
+                        String data1 = nutritions.get(position).getCalories();
+                        cal.remove(data1);
                         Log.i("Remainder",cal.toString());
                         //int sum = 0;
                         String input = tv.getText().toString();
-//                        float sumInput = Float.parseFloat(input);
-//                        float deleteDrink = Float.parseFloat(data1);
-//                        int difference = (int) Math.round(sumInput - deleteDrink);
-//                        String result = Float.toString(difference);
-//                        Log.d("MyInt","Total Calories = "+result);
-//                        TextView tv = (TextView) findViewById(R.id.addCalories);
-//                        tv.setText(result);
-                        //og.i("Selected Item", data1);
+                        float sumInput = Float.parseFloat(input);
+                        float deleteDrink = Float.parseFloat(data1);
+                        int difference = (int) Math.round(sumInput - deleteDrink);
+                        String result = Float.toString(difference);
+                        Log.d("MyInt","Total Calories = "+result);
+                        TextView tv = (TextView) findViewById(R.id.addCalories);
+                        tv.setText(result);
+                       // og.i("Selected Item", data1);
                         nutritions.remove(selectedFromList);
                         String itemLine = selectedFromList.getItemId();
                         Log.d("itemLine", itemLine);

@@ -46,10 +46,10 @@ class BoozeFiles {
     void writeDrink(String id, String drink, String calories, String brand) {
         try {
             FileOutputStream writer = new FileOutputStream(file, true);
-            writer.write((id +"\n").getBytes());
-            writer.write((drink + "\n").getBytes());
-            writer.write((calories + "\n").getBytes());
-            writer.write((brand+"\n").getBytes());
+            writer.write((id +"/").getBytes());
+            writer.write((drink + "/").getBytes());
+            writer.write((calories + "/").getBytes());
+            writer.write((brand+"/"+"\n").getBytes());
             // writer.write((nutrients + "/").getBytes());
             writer.close();
         } catch (IOException ie) {
