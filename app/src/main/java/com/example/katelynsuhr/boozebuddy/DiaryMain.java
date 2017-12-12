@@ -70,21 +70,15 @@ public class DiaryMain extends AppCompatActivity {
         mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView CalendarView, int year, int month, int dayOfMonth) {
-//                Toast toast = Toast.makeText(getBaseContext(),
-//                        "Selected Date is\n\n" + (month + 1) + " / " + dayOfMonth + " / " + year,
-//                        Toast.LENGTH_SHORT);
-               // toast.setGravity(Gravity.TOP | Gravity.CENTER_VERTICAL, 0, 0); //changes position Toast appears
-              //  toast.show();
                 date = month + "_" + dayOfMonth + "_" + year;
+//                                Toast toast = Toast.makeText(getBaseContext(),
+//                        "Selected Date is\n\n" +date ,
+//                        Toast.LENGTH_SHORT);
+//                toast.show();
                 SharedPreferences sharedPreferences = getSharedPreferences("DateDetails", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("date", date);
                 editor.apply();
-               // Toast toaster = Toast.makeText(getBaseContext(), "Date was saved successfully: " + sharedPreferences.contains("date"), Toast.LENGTH_LONG);
-               // toaster.show();
-                // if(BoozeUtil.isExist(DiaryMain.this, date)) {
-                //   updateListView(date);
-                // }
                 updateListView(date);
 
             }
@@ -96,17 +90,11 @@ public class DiaryMain extends AppCompatActivity {
         int month = c.get(Calendar.MONTH);
         int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
         date = month + "_" + dayOfMonth + "_" + year;
-      //  Toast.makeText(this, currentDate, Toast.LENGTH_LONG).show();
         String currentFile = BoozeUtil.readFile(this, date);
         SharedPreferences sharedPreferences = getSharedPreferences("DateDetails", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("date", date);
         editor.apply();
-      //  Toast toaster = Toast.makeText(getBaseContext(), "Date was saved successfully: " + sharedPreferences.contains("date"), Toast.LENGTH_LONG);
-      //  updateListView(currentDate);
-//        if (BoozeUtil.isExist(this, currentDate)) {
-//            Toast.makeText(this, "TRUE" + currentFile, Toast.LENGTH_LONG).show();
-//        }
         //Checks if there is a file already created for the current date, if there is one,
         //if populates the list view with the drinks from that day
         if (BoozeUtil.isExist(this, date)) {
@@ -121,12 +109,9 @@ public class DiaryMain extends AppCompatActivity {
 
     /* List View helper function */
     public void updateListView(final String selectedDate) {
-        // if(BoozeUtil.isExist(DiaryMain.this, selectedDate)){
         stringTest = BoozeUtil.readFile(DiaryMain.this, selectedDate);
         Log.i("stringTest", stringTest);
-        // if(stringTest !=null) {
         items = Arrays.asList(stringTest.split("/"));
-       // Toast.makeText(this,"StringTest"+items, Toast.LENGTH_LONG).show();
         nutritions = new ArrayList<>();
         final List<String> cal = new ArrayList<>();
         final int total = 0;
@@ -134,7 +119,6 @@ public class DiaryMain extends AppCompatActivity {
         Nutrition nutrition = null;
         String val;
         final TextView tv = (TextView) findViewById(R.id.addCalories);
-       // List<String> cal;
         for (int i = 0; i < items.size(); i++) {
             int remainder = i % 4;
             String n;
@@ -171,7 +155,6 @@ public class DiaryMain extends AppCompatActivity {
             }
             String stringCal = Float.toString(sum);
             Log.d("MyInt","Total Calories = "+sum);
-//            TextView tv = (TextView) findViewById(R.id.addCalories);
             tv.setText(stringCal);
         }
 
@@ -246,7 +229,7 @@ public class DiaryMain extends AppCompatActivity {
                         int difference = (int) Math.round(sumInput - deleteDrink);
                         String result = Float.toString(difference);
                         Log.d("MyInt","Total Calories = "+result);
-                        TextView tv = (TextView) findViewById(R.id.addCalories);
+                       TextView tv = (TextView) findViewById(R.id.addCalories);
                         tv.setText(result);
                        // og.i("Selected Item", data1);
                         nutritions.remove(selectedFromList);

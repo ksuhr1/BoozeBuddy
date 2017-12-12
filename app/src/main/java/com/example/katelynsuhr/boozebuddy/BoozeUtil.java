@@ -33,8 +33,9 @@ public final class BoozeUtil {
 
     public static void writeFile(Context context, String data, String name) {
         try {
-            FileOutputStream writer = new FileOutputStream(new File(context.getFilesDir(), name), true);
-            writer.write(data.getBytes());
+            FileOutputStream writer = new FileOutputStream(new File(context.getFilesDir(), name), false);
+            writer.write((data + "/").getBytes());
+           // writer.write(data.getBytes());
             writer.close();
         } catch(IOException ie) {
             ie.printStackTrace();
@@ -81,9 +82,9 @@ public final class BoozeUtil {
             ie.printStackTrace();
             return false;
         }
-
         writeFile(context, sb.toString(), name);
         return true;
     }
+
 
 }
