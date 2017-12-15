@@ -1,7 +1,9 @@
 package com.example.katelynsuhr.boozebuddy;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -56,6 +58,33 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
     {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
     }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
+//    {
+//        // This is because the dialog was cancelled when we recreated the activity.
+//        if (permissions.length == 0 || grantResults.length == 0)
+//            return;
+//
+//        switch (requestCode)
+//        {
+//            case REQUEST_CAMERA:
+//            {
+//                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+//                     {
+//                        Toast.makeText(Scanner.this, "Permission Granted", Toast.LENGTH_LONG).show();
+//                         onResume();
+//                     }
+//
+//                    else
+//                    {
+//                        Toast.makeText(Scanner.this, "Permission Denied", Toast.LENGTH_LONG).show();
+//                        finish();
+//                    }
+//              //  }
+//            }
+//            break;
+//        }
+//    }
 
     public void onRequestPermissionsResult(int requestCode, String permission[], int grantResults[])
     {
@@ -71,33 +100,48 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
                     else
                     {
                         Toast.makeText(Scanner.this, "Permission Denied", Toast.LENGTH_LONG).show();
-                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                        {
-                            if(shouldShowRequestPermissionRationale(Manifest.permission.CAMERA))
-                            {
+                       // if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                        //{
+                           // if(shouldShowRequestPermissionRationale(Manifest.permission.CAMERA))
+                           // {
                                 displayAlertMessage("You need to allow access for both permissions",
                                         new DialogInterface.OnClickListener(){
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
-                                                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                                                {
-                                                    requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
-                                                }
+                                               // if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                                               // {
+                                                 //   requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
+                                               // }
                                             }
                                         });
                                 return;
-                            }
-                        }
+                          //  }
+                        //}
                     }
                 }
                 break;
         }
     }
 
+  //  @Override
+    public void startCamera() {
+        if (checkPermission()) {
+            if (scannerView == null) {
+                scannerView = new ZXingScannerView(this);
+                setContentView(scannerView);
+            }
+            scannerView.setResultHandler(this);
+            System.out.println("fsdkfhjbsdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            scannerView.startCamera();
+        } else {
+            requestPermission();
+        }
+    }
 
     @Override
     public void onResume() {
         super.onResume();
+        startCamera();
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
@@ -109,7 +153,7 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
                     setContentView(scannerView);
                 }
                 scannerView.setResultHandler(this);
-                System.out.println("fsdkfhjbsdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+              //  System.out.println("fsdkfhjbsdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                 scannerView.startCamera();
             }
             else
@@ -142,24 +186,47 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
         final String scanResult = result.getText();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Scan Result");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i){
+//                scannerView.resumeCameraPreview(Scanner.this);
+//            }
+//        });
+        if(scanResult.length() == 12) {
+            builder.setNeutralButton("Visit", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    SharedPreferences sharedP = getSharedPreferences("ScanResult", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedP.edit();
+                    editor.putString("scanResult", scanResult);
+                    editor.putBoolean("scanned", true);
+                    editor.apply();
+                    Intent intent = new Intent(Scanner.this, DiarySearch.class);
+                    startActivity(intent);
+                    // Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(scanResult));
+                    // startActivity(intent);
+
+                }
+            });
+        }
+        if(scanResult.length()<12 || scanResult.length()>12){
+            builder.setTitle("Please scan a barcode with 12 digits, this has "+scanResult.length()+" digits");
+            builder.setMessage(scanResult);
+            builder.setPositiveButton("Try Again", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i){
                 scannerView.resumeCameraPreview(Scanner.this);
             }
         });
-        builder.setNeutralButton("Visit", new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i){
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(scanResult));
-                startActivity(intent);
-
-            }
-        });
-        builder.setMessage(scanResult);
-        AlertDialog alert = builder.create();
-        alert.show();
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+        else {
+            builder.setMessage(scanResult);
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
 
     }
 }
-//}
+
