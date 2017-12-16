@@ -1,5 +1,4 @@
 package com.example.katelynsuhr.boozebuddy;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -7,11 +6,10 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.support.annotation.Nullable;
 
 import java.util.Random;
 
@@ -21,12 +19,11 @@ import java.util.Random;
 
 public class RingtonePlayingService extends Service {
     private boolean isRunning;
-    private Context context;
     private MediaPlayer mMediaPlayer;
     private int startId;
 
 
-    @Nullable
+    @org.jetbrains.annotations.Nullable
     @Override
     public IBinder onBind(Intent intent) {
         Log.e("MyActivity", "In the TimeTracker service");
@@ -42,16 +39,18 @@ public class RingtonePlayingService extends Service {
         final NotificationManager mNM = (NotificationManager)
                 getSystemService(NOTIFICATION_SERVICE);
 
-        //Intent intent1 = new Intent(this.getApplicationContext(), MainActivity.class);
-        //PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent1, 0);
+        Intent intent1 = new Intent(this.getApplicationContext(), MainActivity.class);
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent1, 0);
 
-        Notification mNotify  = new Notification.Builder(this)
+
+        Notification mNotify  = new NotificationCompat.Builder(this)
                 .setContentTitle("Time to get home soon" + "!")
                 .setContentText("Click me!")
-                .setSmallIcon(R.mipmap.bblogo)
-                //.setContentIntent(pIntent)
+                .setSmallIcon(R.drawable.bblogohighres)
+                .setContentIntent(pIntent)
                 .setAutoCancel(true)
                 .build();
+
 
         String state = intent.getExtras().getString("extra");
 

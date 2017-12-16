@@ -37,7 +37,7 @@ public class alarm extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_alarm);
+        setContentView(R.layout.activity_alarm);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         this.context = this;
@@ -57,7 +57,8 @@ public class alarm extends AppCompatActivity {
 
         alarmTimePicker = (TimePicker) findViewById(R.id.timePicker);
 
-
+        myIntent.putExtra("extra", "yes");
+        pending_intent = PendingIntent.getBroadcast(alarm.this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Button start_alarm= (Button) findViewById(R.id.start_alarm);
         start_alarm.setOnClickListener(new View.OnClickListener() {
@@ -78,8 +79,8 @@ public class alarm extends AppCompatActivity {
                 calendar.set(Calendar.HOUR_OF_DAY, alarmTimePicker.getCurrentHour());
                 calendar.set(Calendar.MINUTE, alarmTimePicker.getCurrentMinute());
 
-                myIntent.putExtra("extra", "yes");
-                pending_intent = PendingIntent.getBroadcast(alarm.this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//                myIntent.putExtra("extra", "yes");
+//                pending_intent = PendingIntent.getBroadcast(MainActivity.this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                 alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pending_intent);
 
@@ -155,5 +156,3 @@ public class alarm extends AppCompatActivity {
 
 
 }
-
-

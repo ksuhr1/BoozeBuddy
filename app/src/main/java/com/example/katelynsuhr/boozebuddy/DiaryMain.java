@@ -70,6 +70,7 @@ public class DiaryMain extends AppCompatActivity {
         mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView CalendarView, int year, int month, int dayOfMonth) {
+
                 date = month + "_" + dayOfMonth + "_" + year;
 //                                Toast toast = Toast.makeText(getBaseContext(),
 //                        "Selected Date is\n\n" +date ,
@@ -79,6 +80,9 @@ public class DiaryMain extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("date", date);
                 editor.apply();
+                // if(BoozeUtil.isExist(DiaryMain.this, date)) {
+                //   updateListView(date);
+                // }
                 updateListView(date);
 
             }
@@ -95,6 +99,10 @@ public class DiaryMain extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("date", date);
         editor.apply();
+
+//        if (BoozeUtil.isExist(this, currentDate)) {
+//            Toast.makeText(this, "TRUE" + currentFile, Toast.LENGTH_LONG).show();
+//        }
         //Checks if there is a file already created for the current date, if there is one,
         //if populates the list view with the drinks from that day
         if (BoozeUtil.isExist(this, date)) {

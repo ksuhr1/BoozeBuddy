@@ -29,7 +29,7 @@
 
     <TimePicker
         android:id="@+id/timePicker"
-        android:layout_width="380dp"
+        android:layout_width="match_parent"
         android:layout_height="347dp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="-6dp" />

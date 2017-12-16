@@ -91,7 +91,6 @@ public class contactsearch extends Activity {
         safetyedit.putString("safetylist", safetylist.getString("safetylist", "") + name + "/");
         safetyedit.commit();
         Toast.makeText(this, number, Toast.LENGTH_SHORT).show();
-        entercontact.setText(safetylist.getString("safetylist", ""));
     }
 
     public void deletecontact (View view){
@@ -107,7 +106,6 @@ public class contactsearch extends Activity {
         Toast.makeText(this, joined, Toast.LENGTH_SHORT).show();
         safetyedit.putString("safetylist", joined);
         safetyedit.commit();
-        entercontact.setText(safetylist.getString("safetylist", ""));
     }
     public String getPhoneNumber(String name, Context context) {
         String ret = null;

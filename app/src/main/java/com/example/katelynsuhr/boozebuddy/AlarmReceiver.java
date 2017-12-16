@@ -20,5 +20,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         serviceIntent.putExtra("extra", state);
 
         context.startService(serviceIntent);
+
     }
 }
